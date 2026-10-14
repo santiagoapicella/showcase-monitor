@@ -1,0 +1,86 @@
+name: Monitor cartelera Showcase
+
+on:
+  schedule:
+    # Cada 10 minutos. El horario de GitHub es UTC, pero con "cada 10 min" da igual.
+    # GitHub no garantiza puntualidad: puede demorar algunos minutos o saltear corridas.
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "Modo de ejecución"
+        type: choice
+        default: normal
+        options:
+          - normal
+          - simulacro
+          - probar-telegram
+          - simular-nueva
+          - simular-fecha
+      filmid:
+        description: "filmid (solo para simular-nueva / simular-fecha)"
+        type: string
+        default: ""
+
+# Permiso para commitear los archivos de estado.
+permissions:
+  contents: write
+
+# Nunca dos corridas a la vez (se pisarían el estado).
+concurrency:
+  group: monitor-showcase
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Bajar el repo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias de Python
+        run: pip install -r requirements.txt
+
+      - name: Cache del navegador de Playwright
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+
+      - name: Instalar Chromium para Playwright
+        run: python -m playwright install --with-deps chromium
+
+      - name: Correr el monitor
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MODO: ${{ inputs.modo || 'normal' }}
+          FILMID: ${{ inputs.filmid || '' }}
+        run: python monitor.py --modo "$MODO" --filmid "$FILMID"
+
+      - name: Guardar el estado en el repo
+        # always(): aunque el paso anterior falle, se guarda lo que haya quedado
+        # (el script siempre deja los JSON en un estado consistente).
+        if: always() && (inputs.modo || 'normal') != 'simulacro'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if git diff --cached --quiet; then
+            echo "El estado no cambió; no hay nada que commitear."
+            exit 0
+          fi
+          git commit -m "Actualizar estado de la cartelera"
+          for intento in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            echo "Falló el push (intento $intento); reintento..."
+            sleep 5
+          done
+          exit 1
