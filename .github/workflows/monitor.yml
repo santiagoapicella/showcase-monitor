@@ -91,3 +91,6 @@ jobs:
           done
           echo "::error title=No se pudo guardar el estado::El push de state/ falló 3 veces. La próxima corrida va a trabajar con el estado anterior. Revisá Settings → Actions → General → Workflow permissions (Read and write)."
           exit 1
+
+          echo "::error title=No se pudo guardar el estado::El push de state/ falló 3 veces. La próxima corrida va a trabajar con el estado anterior. Revisá Settings → Actions → General → Workflow permissions (Read and write)."
+          exit 1
