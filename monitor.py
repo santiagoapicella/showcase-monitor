@@ -158,6 +158,11 @@ def limpiar_espacios(texto):
     return " ".join((texto or "").split())
 
 
+def limpiar_secreto(valor):
+    """Saca espacios, saltos de línea y comillas que se pueden colar al pegar un Secret."""
+    return valor.strip().strip("\"'").strip()
+
+
 def sin_tildes(texto):
     return "".join(c for c in unicodedata.normalize("NFD", texto) if unicodedata.category(c) != "Mn").lower()
 
@@ -1162,7 +1167,14 @@ def registrar_exito(ctx):
 
 
 def probar_telegram(tg):
-    yo = tg.llamar("getMe")
+    try:
+        yo = tg.llamar("getMe")
+    except ErrorTelegram as e:
+        if "Unauthorized" in str(e):
+            log.error("Telegram rechazó el token (Unauthorized). El TELEGRAM_TOKEN guardado en GitHub "
+                      "no es válido: revisá que sea exactamente el que da BotFather (/mybots → tu bot → "
+                      "API Token), sin 'bot' adelante, sin comillas, y que no lo hayas regenerado.")
+        raise
     log.info("Token OK: el bot es @%s", yo.get("username"))
     tg.enviar_mensaje("🧪 <b>Prueba del monitor de Showcase</b>\nSi ves este mensaje, el token y el chat id "
                       "están bien configurados.", [[{"text": "🎟 Abrir Showcase", "url": URL_CARTELERA}]])
@@ -1199,8 +1211,15 @@ def main():
         log.info("Sucursales activas iniciales (desde config.json): %s",
                  ", ".join(SUCURSALES[s] for s in sorted(activas, key=int)) or "ninguna")
 
-    token = os.environ.get("TELEGRAM_TOKEN", "").strip()
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+    token = limpiar_secreto(os.environ.get("TELEGRAM_TOKEN", ""))
+    if token.lower().startswith("bot"):
+        token = token[3:]  # error común: copiar el "bot" de la URL junto con el token
+    chat_id = limpiar_secreto(os.environ.get("TELEGRAM_CHAT_ID", ""))
+    if token and not re.fullmatch(r"\d+:[A-Za-z0-9_-]{30,}", token):
+        # No mostramos el token: solo pistas de su forma.
+        log.warning("El TELEGRAM_TOKEN no tiene el formato esperado 'números:letras' "
+                    "(largo %d, tiene ':' = %s, tiene espacios = %s). Revisá el Secret.",
+                    len(token), ":" in token, " " in token)
     if not simulacro and (not token or not chat_id):
         log.error("Faltan TELEGRAM_TOKEN y/o TELEGRAM_CHAT_ID (cargalos como Secrets en GitHub).")
         return 1
