@@ -1,8 +1,1969 @@
 {
-  "inicializado": false,
+  "inicializado": true,
   "ultimo_update_id": 0,
   "fallos_seguidos": 0,
   "ultimo_error": null,
-  "ultima_corrida_ok": null,
-  "peliculas": {}
+  "ultima_corrida_ok": "2026-10-14",
+  "peliculas": {
+    "5845": {
+      "filmid": "5845",
+      "variante": "normal",
+      "titulo": "Spider-Man: un nuevo día",
+      "variantes": [
+        "Spider-Man: un nuevo día"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Spider-Man: un nuevo día",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:47:00-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "5875-imax": {
+      "filmid": "5875",
+      "variante": "imax",
+      "titulo": "La Odisea (IMAX)",
+      "variantes": [
+        "La Odisea"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La Odisea",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:44-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "5875": {
+      "filmid": "5875",
+      "variante": "normal",
+      "titulo": "La Odisea",
+      "variantes": [
+        "La Odisea"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La Odisea",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:44-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "5927": {
+      "filmid": "5927",
+      "variante": "normal",
+      "titulo": "La invitación",
+      "variantes": [
+        "La invitación"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La invitación",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:47:22-03:00",
+      "fechas_conocidas": {
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "5934": {
+      "filmid": "5934",
+      "variante": "normal",
+      "titulo": "Yo, Narciso",
+      "variantes": [
+        "Yo, Narciso"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Yo, Narciso",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:55-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "5955": {
+      "filmid": "5955",
+      "variante": "normal",
+      "titulo": "La noche del demonio: están entre nosotros",
+      "variantes": [
+        "La noche del demonio: están entre nosotros"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La noche del demonio: están entre nosotros",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:51-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "5984": {
+      "filmid": "5984",
+      "variante": "normal",
+      "titulo": "Coyote vs ACME",
+      "variantes": [
+        "Coyote vs ACME"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Coyote vs ACME",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:45-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6016": {
+      "filmid": "6016",
+      "variante": "normal",
+      "titulo": "Avengers Endgame: Bonus - INFINITY VISION",
+      "variantes": [
+        "Avengers Endgame: Bonus - INFINITY VISION"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Avengers Endgame: Bonus - INFINITY VISION",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:47:17-03:00",
+      "fechas_conocidas": {
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6017": {
+      "filmid": "6017",
+      "variante": "normal",
+      "titulo": "Avengers Endgame: Bonus",
+      "variantes": [
+        "Avengers Endgame: Bonus"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Avengers Endgame: Bonus",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:27-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14"
+        ],
+        "15": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6028": {
+      "filmid": "6028",
+      "variante": "normal",
+      "titulo": "Queen Budapest",
+      "variantes": [
+        "Queen Budapest (IMAX)",
+        "Queen Budapest"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Queen Budapest",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:38-03:00",
+      "fechas_conocidas": {},
+      "esperando_primeras_fechas": true,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6060": {
+      "filmid": "6060",
+      "variante": "normal",
+      "titulo": "Resident evil: noche cero",
+      "variantes": [
+        "Resident evil: noche cero"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Resident evil: noche cero",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:42-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6076-imax": {
+      "filmid": "6076",
+      "variante": "imax",
+      "titulo": "Always Lalisa (IMAX)",
+      "variantes": [
+        "Always Lalisa"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Always Lalisa",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:03-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6076": {
+      "filmid": "6076",
+      "variante": "normal",
+      "titulo": "Always Lalisa",
+      "variantes": [
+        "Always Lalisa"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Always Lalisa",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:03-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-17"
+        ],
+        "12": [
+          "2026-10-17"
+        ],
+        "13": [
+          "2026-10-17"
+        ],
+        "14": [
+          "2026-10-17"
+        ],
+        "15": [
+          "2026-10-17"
+        ],
+        "16": [
+          "2026-10-17"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6082": {
+      "filmid": "6082",
+      "variante": "normal",
+      "titulo": "La isla olvidada",
+      "variantes": [
+        "La isla olvidada"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La isla olvidada",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:36-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6083": {
+      "filmid": "6083",
+      "variante": "normal",
+      "titulo": "El corazón de la bestia",
+      "variantes": [
+        "El corazón de la bestia"
+      ],
+      "etiquetas": [],
+      "nombre_web": "El corazón de la bestia",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:30-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6101-imax": {
+      "filmid": "6101",
+      "variante": "imax",
+      "titulo": "Digger (IMAX)",
+      "variantes": [
+        "Digger"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Digger",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:40-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6101": {
+      "filmid": "6101",
+      "variante": "normal",
+      "titulo": "Digger",
+      "variantes": [
+        "Digger"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Digger",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:40-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6102": {
+      "filmid": "6102",
+      "variante": "normal",
+      "titulo": "Verity: la sombra de un engaño",
+      "variantes": [
+        "Verity: la sombra de un engaño"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Verity: la sombra de un engaño",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:15-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6111": {
+      "filmid": "6111",
+      "variante": "normal",
+      "titulo": "Escondida en mi cabeza",
+      "variantes": [
+        "Escondida en mi cabeza"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Escondida en mi cabeza",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:43-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6112": {
+      "filmid": "6112",
+      "variante": "normal",
+      "titulo": "Vértigo 2",
+      "variantes": [
+        "Vértigo 2"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Vértigo 2",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:21-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14"
+        ],
+        "12": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6114": {
+      "filmid": "6114",
+      "variante": "normal",
+      "titulo": "Guardianes del museo 2: los tesoros de Egipto",
+      "variantes": [
+        "Guardianes del museo 2: los tesoros de Egipto"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Guardianes del museo 2: los tesoros de Egipto",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:47:11-03:00",
+      "fechas_conocidas": {
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6154": {
+      "filmid": "6154",
+      "variante": "normal",
+      "titulo": "Madre siniestra",
+      "variantes": [
+        "Madre siniestra"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Madre siniestra",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:11-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6155": {
+      "filmid": "6155",
+      "variante": "normal",
+      "titulo": "A cualquier precio",
+      "variantes": [
+        "A cualquier precio"
+      ],
+      "etiquetas": [],
+      "nombre_web": "A cualquier precio",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:49-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14"
+        ],
+        "12": [
+          "2026-10-14"
+        ],
+        "13": [
+          "2026-10-14"
+        ],
+        "14": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6156": {
+      "filmid": "6156",
+      "variante": "normal",
+      "titulo": "La casa",
+      "variantes": [
+        "La casa"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La casa",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:46:01-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6157": {
+      "filmid": "6157",
+      "variante": "normal",
+      "titulo": "Hope: el primer impacto",
+      "variantes": [
+        "Hope: el primer impacto"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Hope: el primer impacto",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:56-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14"
+        ],
+        "16": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6158": {
+      "filmid": "6158",
+      "variante": "normal",
+      "titulo": "La vida es así",
+      "variantes": [
+        "La vida es así"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La vida es así",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:47:06-03:00",
+      "fechas_conocidas": {
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6159": {
+      "filmid": "6159",
+      "variante": "normal",
+      "titulo": "Cars: 20 años",
+      "variantes": [
+        "Cars: 20 años"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Cars: 20 años",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:52-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6169": {
+      "filmid": "6169",
+      "variante": "normal",
+      "titulo": "Los juegos del hambre",
+      "variantes": [
+        "Los juegos del hambre"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Los juegos del hambre",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:07-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-14",
+          "2026-10-18"
+        ],
+        "12": [
+          "2026-10-14",
+          "2026-10-18"
+        ],
+        "13": [
+          "2026-10-14",
+          "2026-10-18"
+        ],
+        "14": [
+          "2026-10-14",
+          "2026-10-18"
+        ],
+        "15": [
+          "2026-10-14",
+          "2026-10-18"
+        ],
+        "16": [
+          "2026-10-14",
+          "2026-10-18"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6170": {
+      "filmid": "6170",
+      "variante": "normal",
+      "titulo": "Los juegos del hambre: en llamas",
+      "variantes": [
+        "Los juegos del hambre: en llamas"
+      ],
+      "etiquetas": [
+        "ANTICIPADA"
+      ],
+      "nombre_web": "Los juegos del hambre: en llamas",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:46-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-15",
+          "2026-10-19"
+        ],
+        "12": [
+          "2026-10-15",
+          "2026-10-19"
+        ],
+        "13": [
+          "2026-10-15",
+          "2026-10-19"
+        ],
+        "14": [
+          "2026-10-15",
+          "2026-10-19"
+        ],
+        "15": [
+          "2026-10-15",
+          "2026-10-19"
+        ],
+        "16": [
+          "2026-10-15",
+          "2026-10-19"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6171": {
+      "filmid": "6171",
+      "variante": "normal",
+      "titulo": "Los juegos del hambre: Sinsajo-Parte 1",
+      "variantes": [
+        "Los juegos del hambre: Sinsajo-Parte 1"
+      ],
+      "etiquetas": [
+        "ANTICIPADA"
+      ],
+      "nombre_web": "Los juegos del hambre: Sinsajo-Parte 1",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:51-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-16",
+          "2026-10-20"
+        ],
+        "12": [
+          "2026-10-16",
+          "2026-10-20"
+        ],
+        "13": [
+          "2026-10-16",
+          "2026-10-20"
+        ],
+        "14": [
+          "2026-10-16",
+          "2026-10-20"
+        ],
+        "15": [
+          "2026-10-16",
+          "2026-10-20"
+        ],
+        "16": [
+          "2026-10-16",
+          "2026-10-20"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6172": {
+      "filmid": "6172",
+      "variante": "normal",
+      "titulo": "Los juegos del hambre: Sinsajo-Parte 2",
+      "variantes": [
+        "Los juegos del hambre: Sinsajo-Parte 2"
+      ],
+      "etiquetas": [
+        "ANTICIPADA"
+      ],
+      "nombre_web": "Los juegos del hambre: Sinsajo-Parte 2",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:56-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-17",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-17",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-17",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-17",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-17",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-17",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6177-imax": {
+      "filmid": "6177",
+      "variante": "imax",
+      "titulo": "Street Fighter (IMAX)",
+      "variantes": [
+        "Street Fighter"
+      ],
+      "etiquetas": [
+        "ANTICIPADA"
+      ],
+      "nombre_web": "Street Fighter",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:33-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6177": {
+      "filmid": "6177",
+      "variante": "normal",
+      "titulo": "Street Fighter",
+      "variantes": [
+        "Street Fighter"
+      ],
+      "etiquetas": [
+        "ANTICIPADA"
+      ],
+      "nombre_web": "Street Fighter",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:44:33-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6191": {
+      "filmid": "6191",
+      "variante": "normal",
+      "titulo": "La caída de la ballena",
+      "variantes": [
+        "La caída de la ballena"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "La caída de la ballena",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:13-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6192": {
+      "filmid": "6192",
+      "variante": "normal",
+      "titulo": "Quiero tu sexo",
+      "variantes": [
+        "Quiero tu sexo"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Quiero tu sexo",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:18-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6193": {
+      "filmid": "6193",
+      "variante": "normal",
+      "titulo": "Tiempos de ilusión",
+      "variantes": [
+        "Tiempos de ilusión"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Tiempos de ilusión",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:28-03:00",
+      "fechas_conocidas": {
+        "12": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6194": {
+      "filmid": "6194",
+      "variante": "normal",
+      "titulo": "Escuela de monstruos",
+      "variantes": [
+        "Escuela de monstruos"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Escuela de monstruos",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:22-03:00",
+      "fechas_conocidas": {
+        "11": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "12": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "13": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "14": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-21"
+        ],
+        "15": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ],
+        "16": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6195": {
+      "filmid": "6195",
+      "variante": "normal",
+      "titulo": "Cordobeces la película",
+      "variantes": [
+        "Cordobeces la película"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Cordobeces la película",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T15:45:34-03:00",
+      "fechas_conocidas": {
+        "12": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    }
+  },
+  "releer_silencioso": [],
+  "lecturas": {
+    "6177": "2026-10-14T15:44:33-03:00",
+    "6028": "2026-10-14T15:44:38-03:00",
+    "6111": "2026-10-14T15:44:43-03:00",
+    "6170": "2026-10-14T15:44:46-03:00",
+    "6171": "2026-10-14T15:44:51-03:00",
+    "6172": "2026-10-14T15:44:56-03:00",
+    "6076": "2026-10-14T15:45:03-03:00",
+    "6169": "2026-10-14T15:45:07-03:00",
+    "6191": "2026-10-14T15:45:13-03:00",
+    "6192": "2026-10-14T15:45:18-03:00",
+    "6194": "2026-10-14T15:45:22-03:00",
+    "6193": "2026-10-14T15:45:28-03:00",
+    "6195": "2026-10-14T15:45:34-03:00",
+    "6101": "2026-10-14T15:45:40-03:00",
+    "5875": "2026-10-14T15:45:44-03:00",
+    "6155": "2026-10-14T15:45:49-03:00",
+    "6159": "2026-10-14T15:45:52-03:00",
+    "6157": "2026-10-14T15:45:56-03:00",
+    "6156": "2026-10-14T15:46:01-03:00",
+    "6154": "2026-10-14T15:46:11-03:00",
+    "6102": "2026-10-14T15:46:15-03:00",
+    "6112": "2026-10-14T15:46:21-03:00",
+    "6017": "2026-10-14T15:46:27-03:00",
+    "6083": "2026-10-14T15:46:30-03:00",
+    "6082": "2026-10-14T15:46:36-03:00",
+    "6060": "2026-10-14T15:46:42-03:00",
+    "5984": "2026-10-14T15:46:45-03:00",
+    "5955": "2026-10-14T15:46:51-03:00",
+    "5934": "2026-10-14T15:46:55-03:00",
+    "5845": "2026-10-14T15:47:00-03:00",
+    "6158": "2026-10-14T15:47:06-03:00",
+    "6114": "2026-10-14T15:47:11-03:00",
+    "6016": "2026-10-14T15:47:17-03:00",
+    "5927": "2026-10-14T15:47:22-03:00"
+  },
+  "panel": {
+    "enviado": true,
+    "mostradas": [
+      "5845",
+      "5875-imax",
+      "5875",
+      "5927",
+      "5984",
+      "6016",
+      "6028",
+      "6060",
+      "6076-imax",
+      "6076",
+      "6082",
+      "6083",
+      "6101-imax",
+      "6101",
+      "6102",
+      "6114",
+      "6154",
+      "6155",
+      "6156",
+      "6157",
+      "6158",
+      "6159",
+      "6169",
+      "6170",
+      "6171",
+      "6172",
+      "6177-imax",
+      "6177",
+      "6191",
+      "6192",
+      "6193",
+      "6194"
+    ]
+  },
+  "numeros": {
+    "6155": 1,
+    "6076": 2,
+    "6076-imax": 3,
+    "6016": 4,
+    "6159": 5,
+    "5984": 6,
+    "6101": 7,
+    "6101-imax": 8,
+    "6083": 9,
+    "6194": 10,
+    "6114": 11,
+    "6157": 12,
+    "6156": 13,
+    "6191": 14,
+    "5927": 15,
+    "6082": 16,
+    "5875": 17,
+    "5875-imax": 18,
+    "6158": 19,
+    "6169": 20,
+    "6170": 21,
+    "6171": 22,
+    "6172": 23,
+    "6154": 24,
+    "6028": 25,
+    "6192": 26,
+    "6060": 27,
+    "5845": 28,
+    "6177": 29,
+    "6177-imax": 30,
+    "6193": 31,
+    "6102": 32
+  },
+  "panel_pendiente": false
 }
