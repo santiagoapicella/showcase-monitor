@@ -1,9 +1,9 @@
 {
   "inicializado": true,
-  "ultimo_update_id": 189480810,
+  "ultimo_update_id": 189480813,
   "fallos_seguidos": 0,
   "ultimo_error": null,
-  "ultima_corrida_ok": "2026-10-13",
+  "ultima_corrida_ok": "2026-10-14",
   "peliculas": {
     "5799": {
       "titulo": "Toy Story 5",
@@ -20,9 +20,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5799",
+      "variante": "normal"
     },
     "5845": {
       "titulo": "Spider-Man: un nuevo día",
@@ -35,7 +36,6 @@
       "visto_por_primera_vez": "2026-10-13T22:08:45-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -46,7 +46,6 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -57,7 +56,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -67,11 +65,7 @@
           "2026-10-20",
           "2026-10-21"
         ],
-        "15": [
-          "2026-10-13"
-        ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -83,7 +77,28 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false,
+      "filmid": "5845",
+      "variante": "normal"
+    },
+    "5875-imax": {
+      "filmid": "5875",
+      "variante": "imax",
+      "titulo": "La Odisea (IMAX)",
+      "variantes": [
+        "La Odisea"
+      ],
+      "etiquetas": [],
+      "nombre_web": "La Odisea",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T01:01:09-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false
     },
@@ -92,9 +107,7 @@
       "variantes": [
         "La Odisea"
       ],
-      "etiquetas": [
-        "IMAX"
-      ],
+      "etiquetas": [],
       "nombre_web": "La Odisea",
       "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-13T22:07:24-03:00",
@@ -150,16 +163,13 @@
           "2026-10-19",
           "2026-10-20",
           "2026-10-21"
-        ],
-        "18": [
-          "2026-10-13",
-          "2026-10-14"
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5875",
+      "variante": "normal"
     },
     "5927": {
       "titulo": "La invitación",
@@ -172,7 +182,6 @@
       "visto_por_primera_vez": "2026-10-13T22:09:13-03:00",
       "fechas_conocidas": {
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -193,9 +202,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5927",
+      "variante": "normal"
     },
     "5934": {
       "titulo": "Yo, Narciso",
@@ -215,9 +225,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5934",
+      "variante": "normal"
     },
     "5943": {
       "titulo": "Paw Patrol: La dino película",
@@ -234,9 +245,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5943",
+      "variante": "normal"
     },
     "5955": {
       "titulo": "La noche del demonio: están entre nosotros",
@@ -249,7 +261,6 @@
       "visto_por_primera_vez": "2026-10-13T22:08:34-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14"
         ],
         "16": [
@@ -257,9 +268,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5955",
+      "variante": "normal"
     },
     "5984": {
       "titulo": "Coyote vs ACME",
@@ -332,9 +344,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "5984",
+      "variante": "normal"
     },
     "6016": {
       "titulo": "Avengers Endgame: Bonus - INFINITY VISION",
@@ -347,7 +360,6 @@
       "visto_por_primera_vez": "2026-10-13T22:09:00-03:00",
       "fechas_conocidas": {
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -358,7 +370,6 @@
           "2026-10-21"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -370,9 +381,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6016",
+      "variante": "normal"
     },
     "6017": {
       "titulo": "Avengers Endgame: Bonus",
@@ -385,7 +397,6 @@
       "visto_por_primera_vez": "2026-10-13T22:08:11-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -399,14 +410,14 @@
           "2026-10-14"
         ],
         "15": [
-          "2026-10-13",
           "2026-10-14"
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6017",
+      "variante": "normal"
     },
     "6028": {
       "titulo": "Queen Budapest",
@@ -420,9 +431,10 @@
       "visto_por_primera_vez": "2026-10-13T22:06:19-03:00",
       "fechas_conocidas": {},
       "esperando_primeras_fechas": true,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6028",
+      "variante": "normal"
     },
     "6041": {
       "titulo": "Hechizo de amor: la magia continúa",
@@ -439,9 +451,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6041",
+      "variante": "normal"
     },
     "6060": {
       "titulo": "Resident evil: noche cero",
@@ -454,7 +467,6 @@
       "visto_por_primera_vez": "2026-10-13T22:08:26-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -465,7 +477,6 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -476,7 +487,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -487,7 +497,6 @@
           "2026-10-21"
         ],
         "14": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -497,7 +506,6 @@
           "2026-10-21"
         ],
         "15": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -508,7 +516,6 @@
           "2026-10-21"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -520,7 +527,30 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false,
+      "filmid": "6060",
+      "variante": "normal"
+    },
+    "6076-imax": {
+      "filmid": "6076",
+      "variante": "imax",
+      "titulo": "Always Lalisa (IMAX)",
+      "variantes": [
+        "Always Lalisa"
+      ],
+      "etiquetas": [
+        "ESTRENO"
+      ],
+      "nombre_web": "Always Lalisa",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T01:02:01-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false
     },
@@ -530,8 +560,7 @@
         "Always Lalisa"
       ],
       "etiquetas": [
-        "ESTRENO",
-        "IMAX"
+        "ESTRENO"
       ],
       "nombre_web": "Always Lalisa",
       "en_cartelera": true,
@@ -554,15 +583,13 @@
         ],
         "16": [
           "2026-10-17"
-        ],
-        "18": [
-          "2026-10-14"
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6076",
+      "variante": "normal"
     },
     "6082": {
       "titulo": "La isla olvidada",
@@ -635,9 +662,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6082",
+      "variante": "normal"
     },
     "6083": {
       "titulo": "El corazón de la bestia",
@@ -650,7 +678,6 @@
       "visto_por_primera_vez": "2026-10-13T22:08:14-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -671,7 +698,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -682,7 +708,6 @@
           "2026-10-21"
         ],
         "14": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -713,7 +738,28 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false,
+      "filmid": "6083",
+      "variante": "normal"
+    },
+    "6101-imax": {
+      "filmid": "6101",
+      "variante": "imax",
+      "titulo": "Digger (IMAX)",
+      "variantes": [
+        "Digger"
+      ],
+      "etiquetas": [],
+      "nombre_web": "Digger",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T01:02:14-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-14"
+        ]
+      },
+      "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false
     },
@@ -722,15 +768,12 @@
       "variantes": [
         "Digger"
       ],
-      "etiquetas": [
-        "IMAX"
-      ],
+      "etiquetas": [],
       "nombre_web": "Digger",
       "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-13T22:07:19-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -741,7 +784,6 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -752,7 +794,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -763,7 +804,6 @@
           "2026-10-21"
         ],
         "14": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -773,7 +813,6 @@
           "2026-10-21"
         ],
         "15": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -784,7 +823,6 @@
           "2026-10-21"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -793,15 +831,13 @@
           "2026-10-19",
           "2026-10-20",
           "2026-10-21"
-        ],
-        "18": [
-          "2026-10-14"
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6101",
+      "variante": "normal"
     },
     "6102": {
       "titulo": "Verity: la sombra de un engaño",
@@ -814,7 +850,6 @@
       "visto_por_primera_vez": "2026-10-13T22:08:02-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -825,7 +860,6 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -836,7 +870,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -847,7 +880,6 @@
           "2026-10-21"
         ],
         "14": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -857,7 +889,6 @@
           "2026-10-21"
         ],
         "15": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -868,7 +899,6 @@
           "2026-10-21"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -880,9 +910,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6102",
+      "variante": "normal"
     },
     "6111": {
       "titulo": "Escondida en mi cabeza",
@@ -908,9 +939,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6111",
+      "variante": "normal"
     },
     "6112": {
       "titulo": "Vértigo 2",
@@ -939,9 +971,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6112",
+      "variante": "normal"
     },
     "6114": {
       "titulo": "Guardianes del museo 2: los tesoros de Egipto",
@@ -987,9 +1020,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6114",
+      "variante": "normal"
     },
     "6154": {
       "titulo": "Madre siniestra",
@@ -1002,7 +1036,6 @@
       "visto_por_primera_vez": "2026-10-13T22:07:52-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1013,7 +1046,6 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1024,7 +1056,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1035,7 +1066,6 @@
           "2026-10-21"
         ],
         "14": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1045,7 +1075,6 @@
           "2026-10-21"
         ],
         "15": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1056,7 +1085,6 @@
           "2026-10-21"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1068,9 +1096,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6154",
+      "variante": "normal"
     },
     "6155": {
       "titulo": "A cualquier precio",
@@ -1083,29 +1112,26 @@
       "visto_por_primera_vez": "2026-10-13T22:07:31-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14"
         ],
         "13": [
           "2026-10-14"
         ],
         "14": [
-          "2026-10-13",
           "2026-10-14"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14"
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6155",
+      "variante": "normal"
     },
     "6156": {
       "titulo": "La casa",
@@ -1128,7 +1154,6 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1139,7 +1164,6 @@
           "2026-10-21"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1180,9 +1204,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6156",
+      "variante": "normal"
     },
     "6157": {
       "titulo": "Hope: el primer impacto",
@@ -1205,11 +1230,9 @@
           "2026-10-21"
         ],
         "12": [
-          "2026-10-13",
           "2026-10-14"
         ],
         "13": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1227,9 +1250,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6157",
+      "variante": "normal"
     },
     "6158": {
       "titulo": "La vida es así",
@@ -1256,9 +1280,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6158",
+      "variante": "normal"
     },
     "6159": {
       "titulo": "Cars: 20 años",
@@ -1271,7 +1296,6 @@
       "visto_por_primera_vez": "2026-10-13T22:07:35-03:00",
       "fechas_conocidas": {
         "11": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1311,7 +1335,6 @@
           "2026-10-21"
         ],
         "15": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1322,7 +1345,6 @@
           "2026-10-21"
         ],
         "16": [
-          "2026-10-13",
           "2026-10-14",
           "2026-10-15",
           "2026-10-16",
@@ -1334,9 +1356,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6159",
+      "variante": "normal"
     },
     "6169": {
       "titulo": "Los juegos del hambre",
@@ -1344,7 +1367,7 @@
         "Los juegos del hambre"
       ],
       "etiquetas": [
-        "ANTICIPADA"
+        "ESTRENO"
       ],
       "nombre_web": "Los juegos del hambre",
       "en_cartelera": true,
@@ -1376,9 +1399,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6169",
+      "variante": "normal"
     },
     "6170": {
       "titulo": "Los juegos del hambre: en llamas",
@@ -1418,9 +1442,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6170",
+      "variante": "normal"
     },
     "6171": {
       "titulo": "Los juegos del hambre: Sinsajo-Parte 1",
@@ -1459,9 +1484,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6171",
+      "variante": "normal"
     },
     "6172": {
       "titulo": "Los juegos del hambre: Sinsajo-Parte 2",
@@ -1501,7 +1527,36 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false,
+      "filmid": "6172",
+      "variante": "normal"
+    },
+    "6177-imax": {
+      "filmid": "6177",
+      "variante": "imax",
+      "titulo": "Street Fighter (IMAX)",
+      "variantes": [
+        "Street Fighter"
+      ],
+      "etiquetas": [
+        "ANTICIPADA"
+      ],
+      "nombre_web": "Street Fighter",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-14T01:03:20-03:00",
+      "fechas_conocidas": {
+        "18": [
+          "2026-10-15",
+          "2026-10-16",
+          "2026-10-17",
+          "2026-10-18",
+          "2026-10-19",
+          "2026-10-20",
+          "2026-10-21"
+        ]
+      },
+      "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false
     },
@@ -1511,8 +1566,7 @@
         "Street Fighter"
       ],
       "etiquetas": [
-        "ANTICIPADA",
-        "IMAX"
+        "ANTICIPADA"
       ],
       "nombre_web": "Street Fighter",
       "en_cartelera": true,
@@ -1570,21 +1624,13 @@
           "2026-10-19",
           "2026-10-20",
           "2026-10-21"
-        ],
-        "18": [
-          "2026-10-15",
-          "2026-10-16",
-          "2026-10-17",
-          "2026-10-18",
-          "2026-10-19",
-          "2026-10-20",
-          "2026-10-21"
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6177",
+      "variante": "normal"
     },
     "6191": {
       "titulo": "La caída de la ballena",
@@ -1653,9 +1699,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6191",
+      "variante": "normal"
     },
     "6192": {
       "titulo": "Quiero tu sexo",
@@ -1724,9 +1771,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6192",
+      "variante": "normal"
     },
     "6193": {
       "titulo": "Tiempos de ilusión",
@@ -1777,9 +1825,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6193",
+      "variante": "normal"
     },
     "6194": {
       "titulo": "Escuela de monstruos",
@@ -1848,9 +1897,10 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6194",
+      "variante": "normal"
     },
     "6195": {
       "titulo": "Cordobeces la película",
@@ -1875,9 +1925,92 @@
         ]
       },
       "esperando_primeras_fechas": false,
-      "pendiente_aviso_nueva": false,
       "rebasar": false,
-      "confirmar_seguimiento": false
+      "confirmar_seguimiento": false,
+      "filmid": "6195",
+      "variante": "normal"
     }
+  },
+  "releer_silencioso": [],
+  "panel_pendiente": false,
+  "lecturas": {
+    "5799": "2026-10-14T01:01:01-03:00",
+    "5845": "2026-10-14T01:01:05-03:00",
+    "5875": "2026-10-14T01:01:09-03:00",
+    "5927": "2026-10-14T01:01:14-03:00",
+    "5934": "2026-10-14T01:01:19-03:00",
+    "5943": "2026-10-14T01:01:24-03:00",
+    "5955": "2026-10-14T01:01:28-03:00",
+    "5984": "2026-10-14T01:01:31-03:00",
+    "6016": "2026-10-14T01:01:37-03:00",
+    "6017": "2026-10-14T01:01:42-03:00",
+    "6028": "2026-10-14T01:01:48-03:00",
+    "6041": "2026-10-14T01:01:52-03:00",
+    "6060": "2026-10-14T01:01:55-03:00",
+    "6076": "2026-10-14T01:02:01-03:00",
+    "6082": "2026-10-14T01:02:05-03:00",
+    "6083": "2026-10-14T01:02:09-03:00",
+    "6101": "2026-10-14T01:02:14-03:00",
+    "6102": "2026-10-14T01:02:18-03:00",
+    "6111": "2026-10-14T01:02:22-03:00",
+    "6112": "2026-10-14T01:02:28-03:00",
+    "6114": "2026-10-14T01:02:32-03:00",
+    "6154": "2026-10-14T01:02:36-03:00",
+    "6155": "2026-10-14T01:02:40-03:00",
+    "6156": "2026-10-14T01:02:44-03:00",
+    "6157": "2026-10-14T01:02:48-03:00",
+    "6158": "2026-10-14T01:02:52-03:00",
+    "6159": "2026-10-14T01:02:56-03:00",
+    "6169": "2026-10-14T01:03:01-03:00",
+    "6170": "2026-10-14T01:03:06-03:00",
+    "6171": "2026-10-14T01:03:11-03:00",
+    "6172": "2026-10-14T01:03:16-03:00",
+    "6177": "2026-10-14T01:03:20-03:00",
+    "6191": "2026-10-14T01:03:23-03:00",
+    "6192": "2026-10-14T01:03:29-03:00",
+    "6193": "2026-10-14T01:03:34-03:00",
+    "6194": "2026-10-14T01:03:39-03:00",
+    "6195": "2026-10-14T01:03:45-03:00"
+  },
+  "panel": {
+    "enviado": true,
+    "mostradas": [
+      "5845",
+      "5875-imax",
+      "5875",
+      "5927",
+      "5943",
+      "5984",
+      "6016",
+      "6028",
+      "6041",
+      "6060",
+      "6076-imax",
+      "6076",
+      "6082",
+      "6083",
+      "6101-imax",
+      "6101",
+      "6102",
+      "6111",
+      "6112",
+      "6114",
+      "6154",
+      "6155",
+      "6156",
+      "6157",
+      "6158",
+      "6159",
+      "6169",
+      "6170",
+      "6171",
+      "6172",
+      "6177-imax",
+      "6177",
+      "6191",
+      "6192",
+      "6193",
+      "6194"
+    ]
   }
 }
