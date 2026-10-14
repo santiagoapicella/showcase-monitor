@@ -2,9 +2,10 @@ name: Monitor cartelera Showcase
 
 on:
   schedule:
-    # Cada 10 minutos. El horario de GitHub es UTC, pero con "cada 10 min" da igual.
+    # Cada 10 minutos, en los minutos 3, 13, 23... (evita el minuto 0, el más
+    # congestionado en GitHub). El horario de GitHub es UTC; con "cada 10 min" da igual.
     # GitHub no garantiza puntualidad: puede demorar algunos minutos o saltear corridas.
-    - cron: "*/10 * * * *"
+    - cron: "3-59/10 * * * *"
   workflow_dispatch:
     inputs:
       modo:
@@ -18,7 +19,7 @@ on:
           - simular-nueva
           - simular-fecha
       filmid:
-        description: "filmid (solo para simular-nueva / simular-fecha)"
+        description: "filmid (solo para simular-nueva / simular-fecha). Para la versión IMAX: 6028-imax"
         type: string
         default: ""
 
@@ -79,8 +80,14 @@ jobs:
           fi
           git commit -m "Actualizar estado de la cartelera"
           for intento in 1 2 3; do
-            git pull --rebase && git push && exit 0
+            # -X theirs: si hay conflicto en state/, gana la versión de ESTA corrida (la más nueva).
+            if git pull --rebase -X theirs && git push; then
+              echo "Estado guardado en el repo."
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
             echo "Falló el push (intento $intento); reintento..."
             sleep 5
           done
+          echo "::error title=No se pudo guardar el estado::El push de state/ falló 3 veces. La próxima corrida va a trabajar con el estado anterior. Revisá Settings → Actions → General → Workflow permissions (Read and write)."
           exit 1
