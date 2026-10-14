@@ -2,10 +2,10 @@ name: Monitor cartelera Showcase
 
 on:
   schedule:
-    # Cada 10 minutos, en los minutos 3, 13, 23... (evita el minuto 0, el más
+    # Cada 30 minutos, en los minutos 3, 13, 23... (evita el minuto 0, el más
     # congestionado en GitHub). El horario de GitHub es UTC; con "cada 10 min" da igual.
     # GitHub no garantiza puntualidad: puede demorar algunos minutos o saltear corridas.
-    - cron: "3-59/10 * * * *"
+    - cron: "3-59/30 * * * *"
   workflow_dispatch:
     inputs:
       modo:
