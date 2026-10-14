@@ -92,6 +92,9 @@ CONFIG_POR_DEFECTO = {
     "minimo_peliculas_esperadas": 5,
     "avisar_tras_fallos_seguidos": 3,
     "dias_a_conservar_fechas_pasadas": 7,
+    # Películas de la cartelera que se revisan además en cada corrida (rotando),
+    # para detectar, por ejemplo, que les agregaron funciones IMAX.
+    "revisiones_extra_por_corrida": 5,
 }
 
 ESTADO_INICIAL = {
@@ -360,6 +363,8 @@ class Contexto:
         self.activas = activas    # {"13", "18"}: ids de sucursales activas
         self.tg = tg
         self.simulacro = simulacro
+        self.ayuda_enviada = False
+        self.recien_visibles = set()  # películas que aparecieron en esta corrida
 
     @property
     def peliculas(self):
@@ -368,9 +373,9 @@ class Contexto:
     def guardar(self):
         if self.simulacro:
             return
-        self.estado["peliculas"] = dict(sorted(self.peliculas.items(), key=lambda kv: int(kv[0])))
+        self.estado["peliculas"] = dict(sorted(self.peliculas.items(), key=lambda kv: clave_item(kv[0])))
         escribir_json(RUTA_ESTADO, self.estado)
-        escribir_json(RUTA_SEGUIDAS, dict(sorted(self.seguidas.items(), key=lambda kv: int(kv[0]))))
+        escribir_json(RUTA_SEGUIDAS, dict(sorted(self.seguidas.items(), key=lambda kv: clave_item(kv[0]))))
         escribir_json(RUTA_SUCURSALES, {"activas": sorted(self.activas, key=int)})
 
     def nombre_complejos(self):
@@ -645,35 +650,6 @@ def fechas_por_sucursal(funciones):
 # Botones y textos de los mensajes
 # ---------------------------------------------------------------------------
 
-def teclado_pelicula(filmid, seguida):
-    if seguida:
-        boton = {"text": "✅ Siguiendo (tocá para dejar de seguir)", "callback_data": f"dejar:{filmid}|n"}
-    else:
-        boton = {"text": "➕ Seguir esta película", "callback_data": f"seguir:{filmid}|n"}
-    return [[boton], [{"text": "🎟 Ver en la web", "url": url_limpia(filmid)}]]
-
-
-def teclado_link(filmid):
-    return [[{"text": "🎟 Ver en la web", "url": url_limpia(filmid)}]]
-
-
-def teclado_cartelera(ctx):
-    en_cartelera = [(fid, p) for fid, p in ctx.peliculas.items() if p.get("en_cartelera")]
-    en_cartelera.sort(key=lambda kv: kv[1]["titulo"].lower())
-    filas = []
-    for fid, p in en_cartelera[:95]:  # Telegram admite hasta 100 botones
-        if fid in ctx.seguidas:
-            filas.append([{"text": "✅ " + recortar(p["titulo"], 45), "callback_data": f"dejar:{fid}|c"}])
-        else:
-            filas.append([{"text": "➕ " + recortar(p["titulo"], 45), "callback_data": f"seguir:{fid}|c"}])
-    return filas
-
-
-def teclado_seguidas(ctx):
-    return [[{"text": "❌ " + recortar(titulo, 45), "callback_data": f"dejar:{fid}|s"}]
-            for fid, titulo in sorted(ctx.seguidas.items(), key=lambda kv: kv[1].lower())]
-
-
 def teclado_sucursales(ctx):
     filas = []
     for sid, nombre in SUCURSALES.items():
@@ -682,71 +658,145 @@ def teclado_sucursales(ctx):
     return filas
 
 
-def lineas_titulo(p):
-    lineas = [f"<b>{esc(p['titulo'])}</b>"]
-    if p.get("etiquetas"):
-        lineas.append("🏷 " + esc(" · ".join(p["etiquetas"])))
-    otras = [v for v in p.get("variantes", []) if v and v != p["titulo"]]
-    if otras:
-        lineas.append("📝 En la web figura también como: " + esc(" / ".join(otras)))
-    return lineas
+# Nombres cortos para los horarios dentro del panel.
+NOMBRE_CORTO = {"11": "Haedo", "12": "Córdoba", "13": "Norcenter", "14": "Belgrano",
+                "15": "Quilmes", "16": "Rosario", "18": "IMAX"}
+ETIQUETA_NUEVA = "🆕 nueva"
+ETIQUETA_ANTERIOR = "no original"  # fechas agregadas en una tanda anterior a la última
 
 
-def lineas_horarios(funciones, fechas):
+def resumen_horarios(entradas):
+    """[{complejo_id, horarios}, ...] -> 'Norcenter: 15:30, 19:00 · IMAX: 16:00'."""
+    por_sucursal = {}
+    for e in entradas:
+        nombre = NOMBRE_CORTO.get(e.get("complejo_id"), e.get("complejo", "?"))
+        lista = por_sucursal.setdefault(nombre, [])
+        for h in e["horarios"]:
+            agregar_unico(lista, h)
+    return " · ".join(f"{n}: {', '.join(hs)}" for n, hs in por_sucursal.items())
+
+
+def es_visible(ctx, p):
+    """Una película aparece en CARTELERA si tiene funciones en tus sucursales
+    activas, o si todavía no tiene funciones en ningún lado (ej. anticipada)."""
+    if not p.get("en_cartelera"):
+        return False
+    conocidas = p.get("fechas_conocidas") or {}
+    if not conocidas:
+        return bool(p.get("esperando_primeras_fechas"))
+    return any(sid in ctx.activas for sid in conocidas)
+
+
+def lineas_fechas_seguida(ctx, p):
+    hoy_iso = hoy().isoformat()
+    horarios = p.get("horarios") or {}
+    if horarios:  # fechas de la última lectura (lo más fiel a la web)
+        fechas = sorted(d for d in horarios if d >= hoy_iso)
+    else:
+        fechas = sorted({d for sid in ctx.activas for d in (p.get("fechas_conocidas") or {}).get(sid, [])
+                         if d >= hoy_iso})
+    if not fechas:
+        return ["    (todavía sin funciones en tus sucursales)"]
+    ultima = p.get("ultima_tanda", 0)
+    tandas = p.get("tandas") or {}
     lineas = []
-    for dia in sorted(fechas):
-        lineas.append("")
-        lineas.append(f"<b>📅 {formatear_fecha(dia)}</b>")
-        for e in funciones.get(dia, []):
-            formato = f" ({esc(e['formato'])})" if e["formato"] else ""
-            lineas.append(f"• {esc(e['complejo'])}{formato}: {esc(', '.join(e['horarios']))}")
+    for d in fechas:
+        tanda = tandas.get(d, 0)
+        if tanda == 0:
+            linea = f"    {formatear_fecha(d)}"
+        elif tanda == ultima:
+            linea = f"    {formatear_fecha(d)}  <b>{ETIQUETA_NUEVA}</b>"
+            if horarios.get(d):
+                linea += f"  ({esc(horarios[d])})"
+        else:
+            linea = f"    {formatear_fecha(d)}  <i>{ETIQUETA_ANTERIOR}</i>"
+        lineas.append(linea)
     return lineas
 
 
-def mensaje_nueva(ctx, p, mias):
-    lineas = ["🎬 <b>NUEVA EN CARTELERA</b>", ""] + lineas_titulo(p) + [""]
-    if mias:
-        lineas.append(f"📅 Fechas en {esc(ctx.nombre_complejos())}: {lista_fechas(mias)}")
+def armar_panel(ctx, visibles, nuevas, quitadas):
+    """Arma el texto del panel y sus botones (Telegram los pone siempre abajo)."""
+    # Orden alfabético; "Batman" queda justo antes que "Batman (IMAX)".
+    orden = sorted(visibles, key=lambda f: (ctx.peliculas[f]["titulo"].lower(), clave_item(f)))
+    numero = {fid: i for i, fid in enumerate(orden, 1)}
+
+    lineas = ["/sucursales - elegir de qué sucursal querés avisos",
+              f"<i>Activas: {esc(ctx.nombre_complejos())}</i>",
+              "", "<b>CARTELERA</b>", ""]
+    if not orden:
+        lineas.append("(no hay películas en tus sucursales activas)")
+    for fid in orden:
+        p = ctx.peliculas[fid]
+        etiquetas = f" [{esc(' · '.join(p['etiquetas']))}]" if p.get("etiquetas") else ""
+        seguida = " ⭐" if fid in ctx.seguidas else ""
+        nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if fid in nuevas else ""
+        lineas.append(f"{numero[fid]}. {esc(p['titulo'])}{etiquetas}{seguida}{nueva}")
+
+    seguidas = sorted(ctx.seguidas, key=lambda f: ctx.seguidas[f].lower())
+    if seguidas:
+        lineas += ["", "<b>SEGUIDAS</b>"]
+        for fid in seguidas:
+            p = ctx.peliculas.get(fid) or {}
+            lineas += ["", f"- <b>{esc(p.get('titulo') or ctx.seguidas[fid])}</b>"]
+            lineas += lineas_fechas_seguida(ctx, p)
+
+    if quitadas:
+        lineas.append("")
+        for titulo in sorted(quitadas):
+            lineas.append(f"❌ Quitaron \"{esc(titulo)}\"")
+
+    # Botones: "Seguir N" para las no seguidas y "Dejar de seguir N" para las seguidas.
+    dejar = []
+    for fid in seguidas:
+        etiqueta = str(numero[fid]) if fid in numero else recortar(ctx.seguidas[fid], 20)
+        dejar.append({"text": f"Dejar de seguir {etiqueta}", "callback_data": f"dejar:{fid}|p"})
+    seguir_botones = [{"text": f"Seguir {numero[f]}", "callback_data": f"seguir:{f}|p"}
+                      for f in orden if f not in ctx.seguidas]
+    seguir_botones = seguir_botones[:max(0, 100 - len(dejar))]  # Telegram: máximo 100 botones
+    filas = [seguir_botones[i:i + 4] for i in range(0, len(seguir_botones), 4)]
+    filas += [dejar[i:i + 2] for i in range(0, len(dejar), 2)]
+    return "\n".join(lineas), filas
+
+
+def actualizar_panel(ctx):
+    """Manda el panel solo si cambió algo (o si es el primero)."""
+    panel = ctx.estado.setdefault("panel", {"enviado": False, "mostradas": []})
+    visibles = {fid for fid, p in ctx.peliculas.items() if es_visible(ctx, p)}
+    anteriores = set(panel.get("mostradas", []))
+
+    if panel.get("enviado"):
+        nuevas = {fid for fid in ctx.recien_visibles if fid in visibles}
+        quitadas = [ctx.peliculas[fid]["titulo"] for fid in anteriores
+                    if fid in ctx.peliculas and not ctx.peliculas[fid].get("en_cartelera")]
+        if not (nuevas or quitadas or ctx.estado.get("panel_pendiente")):
+            log.info("Sin cambios: no mando nada.")
+            return
     else:
-        lineas.append("📅 Todavía sin funciones cargadas. Te aviso cuando aparezcan.")
-    return "\n".join(lineas)
+        nuevas, quitadas = set(), []  # primer panel: sin marcas
 
-
-def mensaje_primeras_fechas(ctx, p, fechas):
-    return "\n".join([
-        f"📅 <b>Ya tiene fechas:</b> {esc(p['titulo'])}",
-        f"En {esc(ctx.nombre_complejos())}: {lista_fechas(fechas)}",
-        "",
-        "Si querés que te avise cuando agreguen más (con horarios), seguila.",
-    ])
-
-
-def mensaje_fechas_nuevas(ctx, p, mias, nuevas):
-    lineas = [f"🆕 <b>Fechas nuevas: {esc(p['titulo'])}</b>",
-              f"({esc(ctx.nombre_complejos())})"]
-    return "\n".join(lineas + lineas_horarios(mias, nuevas))
-
-
-def mensaje_estado_actual(ctx, p, mias):
-    futuras = [f for f in mias if f >= hoy().isoformat()]
-    lineas = [f"📋 <b>{esc(p['titulo'])}</b>: fechas y horarios actuales en {esc(ctx.nombre_complejos())}"]
-    if futuras:
-        lineas += lineas_horarios(mias, futuras)
-        lineas += ["", "Te aviso cuando agreguen fechas nuevas."]
-    else:
-        lineas += ["", "Todavía no tiene funciones ahí. Te aviso apenas carguen."]
-    return "\n".join(lineas)
+    texto, botones = armar_panel(ctx, visibles, nuevas, quitadas)
+    log.info("Mando el panel (%d nuevas, %d quitadas).", len(nuevas), len(quitadas))
+    try:
+        ctx.tg.enviar_mensaje(texto, botones)
+    except ErrorTelegram as e:
+        log.error("No pude mandar el panel (%s). Se reintenta en la próxima corrida.", e)
+        ctx.estado["panel_pendiente"] = True
+        ctx.guardar()
+        return
+    panel["enviado"] = True
+    panel["mostradas"] = sorted(visibles, key=clave_item)
+    ctx.estado["panel_pendiente"] = False
+    ctx.guardar()
 
 
 def texto_ayuda(ctx):
     return "\n".join([
         "🤖 <b>Monitor de cartelera Showcase</b>",
         "",
-        "Te aviso cuando aparece una película nueva y cuando le agregan fechas "
-        f"a las que seguís, solo en tus sucursales activas ({esc(ctx.nombre_complejos())}).",
+        "Te mando un panel con la cartelera y tus películas seguidas solo cuando cambia algo: "
+        "película nueva o quitada, fechas nuevas en una seguida, o cuando tocás un botón.",
         "",
-        "/cartelera – lista para seguir o dejar de seguir películas",
-        "/seguidas – las películas que seguís",
+        "/cartelera – mandarme el panel ahora",
         "/sucursales – elegir de qué sucursales querés avisos",
         "/ayuda – este mensaje",
         "",
@@ -774,6 +824,16 @@ def procesar_telegram(ctx):
             log.exception("Error procesando la interacción %s", update.get("update_id"))
         ctx.estado["ultimo_update_id"] = max(ctx.estado["ultimo_update_id"], update["update_id"])
         ctx.guardar()
+    if updates:
+        # Confirmamos a Telegram que ya procesamos estas interacciones (pedir
+        # con un offset mayor las "consume" del lado de Telegram). Así, aunque
+        # falle el guardado del estado en el repo, la próxima corrida no las
+        # vuelve a recibir ni a contestar.
+        try:
+            ctx.tg.llamar("getUpdates", reintentos=2, offset=ctx.estado["ultimo_update_id"] + 1,
+                          limit=1, timeout=0)
+        except ErrorTelegram as e:
+            log.warning("No pude confirmar las interacciones a Telegram (%s).", e)
 
 
 def procesar_update(ctx, update):
@@ -791,26 +851,17 @@ def procesar_update(ctx, update):
             if mensaje.get("message_id"):
                 ctx.tg.editar_botones(chat_id, mensaje["message_id"], teclado_sucursales(ctx))
             return
-        filmid, _, origen = resto.partition("|")
-        if not filmid.isdigit():
+        filmid = resto.partition("|")[0]
+        if not PATRON_ITEM.match(filmid):  # "6028" o "6028-imax"
             return
         if accion == "seguir":
             seguir(ctx, filmid)
-            ctx.tg.responder_callback(cq["id"], "Listo, la sigo")
         elif accion == "dejar":
             dejar_de_seguir(ctx, filmid)
-            ctx.tg.responder_callback(cq["id"], "Listo, la dejé de seguir")
         else:
             return
-        # Actualizamos los botones del mensaje donde tocaste.
-        if mensaje.get("message_id"):
-            if origen == "c":
-                botones = teclado_cartelera(ctx)
-            elif origen == "s":
-                botones = teclado_seguidas(ctx)
-            else:
-                botones = teclado_pelicula(filmid, filmid in ctx.seguidas)
-            ctx.tg.editar_botones(chat_id, mensaje["message_id"], botones)
+        ctx.tg.responder_callback(cq["id"], "Listo")
+        # El panel nuevo (con el cambio) se manda al final de la corrida.
 
     elif "message" in update:
         mensaje = update["message"]
@@ -820,41 +871,35 @@ def procesar_update(ctx, update):
             return
         texto = (mensaje.get("text") or "").strip()
         comando = texto.split()[0].split("@")[0].lower() if texto else ""
-        if comando == "/cartelera":
-            botones = teclado_cartelera(ctx)
-            if botones:
-                ctx.tg.enviar_mensaje("🎞 <b>Cartelera actual</b>\n➕ = tocá para seguir · ✅ = la seguís "
-                                      "(tocá para dejar de seguir)", botones)
-            else:
-                ctx.tg.enviar_mensaje("Todavía no leí la cartelera. Probá de nuevo en unos minutos.")
-        elif comando == "/seguidas":
-            if ctx.seguidas:
-                ctx.tg.enviar_mensaje("⭐ <b>Películas que seguís</b>\nTocá una para dejar de seguirla.",
-                                      teclado_seguidas(ctx))
-            else:
-                ctx.tg.enviar_mensaje("No seguís ninguna película. Usá /cartelera para elegir.")
+        if comando in ("/cartelera", "/seguidas"):
+            ctx.estado["panel_pendiente"] = True  # se manda al final de la corrida
         elif comando == "/sucursales":
             ctx.tg.enviar_mensaje("🏢 <b>Sucursales</b>\n✅ = activa (te aviso) · ❌ = inactiva\n"
                                   "Tocá una para cambiarla.", teclado_sucursales(ctx))
-        else:  # /start, /ayuda o cualquier otra cosa
-            ctx.tg.enviar_mensaje(texto_ayuda(ctx))
+        elif comando in ("/start", "/ayuda", "/help"):
+            # Como mucho una ayuda por corrida, aunque haya varios /start acumulados.
+            if not ctx.ayuda_enviada:
+                ctx.tg.enviar_mensaje(texto_ayuda(ctx))
+                ctx.ayuda_enviada = True
+        else:
+            # Cualquier otro texto se ignora: antes contestaba la ayuda a TODO,
+            # y por eso llegaban varias ayudas juntas en la primera corrida.
+            log.info("Ignoro un mensaje que no es un comando.")
 
 
 def seguir(ctx, filmid):
     p = ctx.peliculas.get(filmid)
     titulo = p["titulo"] if p else f"Película {filmid}"
+    ctx.estado["panel_pendiente"] = True
     if filmid in ctx.seguidas:
-        ctx.tg.enviar_mensaje(f"Ya seguías <b>{esc(titulo)}</b>.")
         return
     ctx.seguidas[filmid] = titulo
     if p:
-        # En la próxima lectura tomamos sus fechas actuales como punto de
-        # partida y te las mandamos, en vez de avisarlas como "nuevas".
+        # En la próxima lectura sus fechas actuales pasan a ser las "originales"
+        # (sin etiqueta); las que se agreguen después se marcan como nuevas.
         p["rebasar"] = True
         p["confirmar_seguimiento"] = True
     log.info("Ahora se sigue %s (%s).", filmid, titulo)
-    ctx.tg.enviar_mensaje(f"✅ Ahora seguís <b>{esc(titulo)}</b>.\n"
-                          "En un momento te paso sus fechas y horarios actuales.")
 
 
 def cambiar_sucursal(ctx, sid):
@@ -867,36 +912,78 @@ def cambiar_sucursal(ctx, sid):
         ctx.activas.add(sid)
         accion = "✅ Activaste"
     log.info("%s la sucursal %s.", accion, SUCURSALES[sid])
-    ctx.tg.enviar_mensaje(f"{accion} <b>{esc(SUCURSALES[sid])}</b>.\n"
-                          f"Activas ahora: {esc(ctx.nombre_complejos())}.")
+    ctx.estado["panel_pendiente"] = True
 
 
 def dejar_de_seguir(ctx, filmid):
-    titulo = ctx.seguidas.pop(filmid, None)
+    ctx.seguidas.pop(filmid, None)
     p = ctx.peliculas.get(filmid)
     if p:
         p["confirmar_seguimiento"] = False
-        titulo = titulo or p["titulo"]
     log.info("Se deja de seguir %s.", filmid)
-    ctx.tg.enviar_mensaje(f"🗑 Dejaste de seguir <b>{esc(titulo or filmid)}</b>.")
+    ctx.estado["panel_pendiente"] = True
 
 
 # ---------------------------------------------------------------------------
 # Lógica principal: comparar y avisar
 # ---------------------------------------------------------------------------
 
-def entrada_nueva(filmid, info_cartelera, resultado):
+# ---- Ítems: cada película se separa en versión normal e IMAX ---------------
+# El sitio usa el mismo filmid para "Batman" y "Batman (IMAX)"; lo que cambia
+# es el formato de cada función. Cada versión es un "ítem" con su propia id:
+# "6028" (normal) y "6028-imax". Se siguen y se muestran por separado.
+
+PATRON_ITEM = re.compile(r"^\d+(-imax)?$")
+
+
+def item_id(filmid, variante):
+    return f"{filmid}-imax" if variante == "imax" else str(filmid)
+
+
+def filmid_de(iid):
+    return str(iid).split("-")[0]
+
+
+def variante_de(iid):
+    return "imax" if str(iid).endswith("-imax") else "normal"
+
+
+def clave_item(iid):
+    """Para ordenar ítems: por filmid y la versión normal antes que la IMAX."""
+    return (int(filmid_de(iid)), variante_de(iid))
+
+
+def titulo_item(base, variante):
+    if variante == "imax" and "imax" not in base.lower():
+        return f"{base} (IMAX)"
+    return base
+
+
+def separar_por_variante(funciones):
+    """{"normal": funciones..., "imax": funciones...} según el formato de cada función."""
+    resultado = {}
+    for dia, entradas in funciones.items():
+        for e in entradas:
+            variante = "imax" if "IMAX" in (e.get("formato") or "").upper() else "normal"
+            resultado.setdefault(variante, {}).setdefault(dia, []).append(e)
+    return resultado
+
+
+def entrada_nueva(filmid, variante, info_cartelera, resultado):
     info = info_cartelera or {}
+    base = info.get("titulo") or resultado.get("nombre_web") or f"Película {filmid}"
     return {
-        "titulo": info.get("titulo") or resultado.get("nombre_web") or f"Película {filmid}",
+        "filmid": str(filmid),
+        "variante": variante,
+        "titulo": titulo_item(base, variante),
         "variantes": info.get("variantes", []),
-        "etiquetas": info.get("etiquetas", []),
+        # IMAX ya va en el título del ítem; no se repite como etiqueta.
+        "etiquetas": [e for e in info.get("etiquetas", []) if e != "IMAX"],
         "nombre_web": resultado.get("nombre_web", ""),
         "en_cartelera": bool(info_cartelera),
         "visto_por_primera_vez": ahora_iso(),
         "fechas_conocidas": {},  # {"13": ["2026-10-15", ...], ...} por sucursal
         "esperando_primeras_fechas": False,
-        "pendiente_aviso_nueva": False,  # vista, pero solo en sucursales inactivas
         "rebasar": False,
         "confirmar_seguimiento": False,
     }
@@ -910,59 +997,75 @@ def unir_fechas(conocidas, actuales):
     return {sid: sorted(f) for sid, f in sorted(resultado.items(), key=lambda kv: int(kv[0])) if f}
 
 
-def procesar_pelicula(ctx, filmid, info_cartelera, resultado, inicial):
+def procesar_filmid(ctx, filmid, info_cartelera, resultado, inicial):
+    """Reparte lo leído de una página de película entre sus ítems (normal / IMAX)."""
+    releer = ctx.estado.setdefault("releer_silencioso", [])
+    silencioso = inicial or filmid in releer
+    por_variante = separar_por_variante(resultado["funciones"])
+    hay_funciones = bool(resultado["funciones"])
+
+    ids = {iid for iid, p in ctx.peliculas.items() if p.get("filmid") == filmid}
+    ids |= {item_id(filmid, v) for v in por_variante}
+    if not ids:  # sin funciones en ningún lado (ej. anticipada): un ítem normal
+        ids.add(item_id(filmid, "normal"))
+
+    for iid in sorted(ids, key=clave_item):
+        variante = variante_de(iid)
+        sub = {"nombre_web": resultado.get("nombre_web", ""), "funciones": por_variante.get(variante, {})}
+        procesar_item(ctx, iid, filmid, variante, info_cartelera, sub, silencioso, hay_funciones)
+
+    if filmid in releer:
+        releer.remove(filmid)
+    ctx.estado.setdefault("lecturas", {})[filmid] = ahora_iso()
+
+
+def procesar_item(ctx, iid, filmid, variante, info_cartelera, resultado, silencioso, hay_funciones):
     """
-    Compara lo leído con lo guardado y manda el aviso que corresponda.
-    Regla de oro: el estado se actualiza DESPUÉS de mandar el aviso. Si
-    Telegram falla, no se marca nada y en la próxima corrida se reintenta.
+    Compara lo leído con lo guardado y actualiza el estado de UN ítem. No
+    manda mensajes: marca qué cambió y el panel se manda al final de la corrida.
+    silencioso: no marcar nada como "nueva" (primera corrida o migración).
     """
     todas = resultado["funciones"]
     mias = filtrar_complejos(todas, ctx.activas)
     fechas_mias = set(mias)
     actuales = fechas_por_sucursal(todas)  # se guardan las 7, activas o no
     hoy_iso = hoy().isoformat()
-    p = ctx.peliculas.get(filmid)
+    p = ctx.peliculas.get(iid)
 
-    # 1) Película que nunca habíamos visto.
+    # 1) Ítem que nunca habíamos visto.
     if p is None:
-        p = entrada_nueva(filmid, info_cartelera, resultado)
-        # Se avisa si tiene funciones en tus sucursales activas, o si no tiene
-        # funciones en ningún lado todavía (ej. anticipadas). Si solo está en
-        # sucursales inactivas, se registra sin avisar y queda pendiente.
-        avisar = bool(not inicial and ctx.activas and (fechas_mias or not todas))
-        if avisar:
-            log.info("   NUEVA: %s (%s)", p["titulo"], filmid)
-            ctx.tg.enviar_foto(URL_POSTER.format(filmid), mensaje_nueva(ctx, p, fechas_mias),
-                               teclado_pelicula(filmid, filmid in ctx.seguidas))
-        elif not inicial:
-            log.info("   NUEVA pero sin funciones en tus sucursales: %s. Queda pendiente.", p["titulo"])
-            p["pendiente_aviso_nueva"] = True
+        p = entrada_nueva(filmid, variante, info_cartelera, resultado)
         p["fechas_conocidas"] = unir_fechas({}, actuales)
-        # Sin funciones en ningún lado (ej. anticipada): queda esperando sus primeras fechas.
-        p["esperando_primeras_fechas"] = (avisar or (inicial and not todas)) and not fechas_mias
-        ctx.peliculas[filmid] = p
+        # Sin funciones en ningún lado (ej. anticipada): se muestra y se sigue revisando.
+        p["esperando_primeras_fechas"] = not hay_funciones
+        # Si solo tiene funciones en sucursales inactivas, queda oculto (no se
+        # muestra) y se sigue revisando hasta que aparezca en una activa.
+        if not silencioso and es_visible(ctx, p):
+            log.info("   NUEVA: %s (%s)", p["titulo"], iid)
+            ctx.recien_visibles.add(iid)
+        if iid in ctx.seguidas:
+            guardar_horarios(p, mias)
+            iniciar_tandas(p, fechas_mias)
+        ctx.peliculas[iid] = p
         return
 
+    oculta_antes = not es_visible(ctx, p)
     if resultado.get("nombre_web"):
         p["nombre_web"] = resultado["nombre_web"]
+    if iid in ctx.seguidas:
+        guardar_horarios(p, mias)
+    if hay_funciones:
+        p["esperando_primeras_fechas"] = False
+    p.pop("pendiente_aviso_nueva", None)  # campo de una versión anterior
 
-    # 2) La acabás de seguir (o quedó pendiente una lectura base).
+    # 2) La acabás de seguir (o quedó pendiente una lectura base): sus fechas
+    #    actuales pasan a ser las originales, sin avisar nada.
     if p.get("rebasar"):
-        if p.get("confirmar_seguimiento") and filmid in ctx.seguidas:
-            ctx.tg.enviar_mensaje(mensaje_estado_actual(ctx, p, mias), teclado_link(filmid))
+        if p.get("confirmar_seguimiento") and iid in ctx.seguidas:
+            iniciar_tandas(p, fechas_mias)
         p["fechas_conocidas"] = unir_fechas(p.get("fechas_conocidas", {}), actuales)
         p["rebasar"] = False
         p["confirmar_seguimiento"] = False
-        return
-
-    # 3) Estaba pendiente (solo en sucursales inactivas) y ahora aparece en una activa.
-    if p.get("pendiente_aviso_nueva"):
-        if fechas_mias:
-            log.info("   NUEVA (ahora en tus sucursales): %s (%s)", p["titulo"], filmid)
-            ctx.tg.enviar_foto(URL_POSTER.format(filmid), mensaje_nueva(ctx, p, fechas_mias),
-                               teclado_pelicula(filmid, filmid in ctx.seguidas))
-            p["pendiente_aviso_nueva"] = False
-        p["fechas_conocidas"] = unir_fechas(p.get("fechas_conocidas", {}), actuales)
         return
 
     # Fechas nuevas = fechas de sucursales ACTIVAS que antes no tenían.
@@ -972,32 +1075,46 @@ def procesar_pelicula(ctx, filmid, info_cartelera, resultado, inicial):
         nuevas |= actuales.get(sid, set()) - set(conocidas.get(sid, []))
     nuevas = {f for f in nuevas if f >= hoy_iso}
 
-    # 4) Película seguida con fechas nuevas: aviso con horarios.
-    if filmid in ctx.seguidas:
-        if nuevas:
-            log.info("   FECHAS NUEVAS en seguida %s: %s", p["titulo"], sorted(nuevas))
-            ctx.tg.enviar_mensaje(mensaje_fechas_nuevas(ctx, p, mias, nuevas), teclado_link(filmid))
-    # 5) No seguida, pero estaba sin fechas y ahora tiene en tus sucursales: aviso único.
-    elif p.get("esperando_primeras_fechas") and nuevas:
-        log.info("   PRIMERAS FECHAS en %s: %s", p["titulo"], sorted(nuevas))
-        ctx.tg.enviar_mensaje(mensaje_primeras_fechas(ctx, p, nuevas), teclado_pelicula(filmid, False))
+    # 4) Película seguida con fechas nuevas: todas las de esta corrida forman
+    #    una tanda nueva; la tanda anterior pasa a "no original".
+    if iid in ctx.seguidas and nuevas:
+        log.info("   FECHAS NUEVAS en seguida %s: %s", p["titulo"], sorted(nuevas))
+        p["ultima_tanda"] = p.get("ultima_tanda", 0) + 1
+        tandas = p.setdefault("tandas", {})
+        for d in nuevas:
+            tandas[d] = p["ultima_tanda"]
+        ctx.estado["panel_pendiente"] = True
 
     p["fechas_conocidas"] = unir_fechas(conocidas, actuales)
-    if fechas_mias:
-        p["esperando_primeras_fechas"] = False
+
+    # 5) Estaba oculta (solo en sucursales inactivas) y ahora llegó a una activa.
+    if oculta_antes and not silencioso and fechas_mias and es_visible(ctx, p):
+        log.info("   NUEVA (ahora en tus sucursales): %s (%s)", p["titulo"], iid)
+        ctx.recien_visibles.add(iid)
+
+
+def iniciar_tandas(p, fechas):
+    """Las fechas actuales quedan como la tanda original (0, sin etiqueta)."""
+    p["tandas"] = {d: 0 for d in sorted(fechas)}
+    p["ultima_tanda"] = 0
+
+
+def guardar_horarios(p, mias):
+    """Guarda fecha -> resumen de horarios (solo sucursales activas), de la última lectura."""
+    p["horarios"] = {d: resumen_horarios(entradas) for d, entradas in sorted(mias.items())}
 
 
 def actualizar_presencia(ctx, cartelera):
     """Marca qué películas siguen en cartelera y refresca títulos y etiquetas."""
-    for filmid, p in ctx.peliculas.items():
-        info = cartelera.get(filmid)
+    for iid, p in ctx.peliculas.items():
+        info = cartelera.get(p.get("filmid", filmid_de(iid)))
         p["en_cartelera"] = info is not None
         if info:
-            p["titulo"] = info["titulo"]
+            p["titulo"] = titulo_item(info["titulo"], p.get("variante", "normal"))
             p["variantes"] = info["variantes"]
-            p["etiquetas"] = info["etiquetas"]
-            if filmid in ctx.seguidas:
-                ctx.seguidas[filmid] = info["titulo"]
+            p["etiquetas"] = [e for e in info["etiquetas"] if e != "IMAX"]
+            if iid in ctx.seguidas:
+                ctx.seguidas[iid] = p["titulo"]
 
 
 def podar_fechas_viejas(ctx):
@@ -1006,6 +1123,8 @@ def podar_fechas_viejas(ctx):
         p["fechas_conocidas"] = {sid: [f for f in fechas if f >= limite]
                                  for sid, fechas in p.get("fechas_conocidas", {}).items()
                                  if any(f >= limite for f in fechas)}
+        if "tandas" in p:  # ultima_tanda se conserva: así lo "no original" no vuelve a ser "nueva"
+            p["tandas"] = {d: t for d, t in p["tandas"].items() if d >= limite}
 
 
 def migrar_estado(ctx):
@@ -1015,14 +1134,23 @@ def migrar_estado(ctx):
     "en silencio" para armar la base nueva, sin mandarte avisos.
     """
     migradas = 0
-    for p in ctx.peliculas.values():
+    releer = ctx.estado.setdefault("releer_silencioso", [])
+    for iid, p in ctx.peliculas.items():
         if isinstance(p.get("fechas_conocidas"), list):
             p["fechas_conocidas"] = {}
             p["rebasar"] = True
             migradas += 1
-        p.setdefault("pendiente_aviso_nueva", False)
+        # Versión con ítems normal/IMAX: lo viejo pasa a ser el ítem "normal" y
+        # la película se relee una vez en silencio (sin marcar nada como nueva).
+        if "variante" not in p:
+            p["filmid"] = filmid_de(iid)
+            p["variante"] = "normal"
+            p["fechas_conocidas"] = {}
+            p["rebasar"] = True
+            agregar_unico(releer, p["filmid"])
+            migradas += 1
     if migradas:
-        log.info("Migración: %d películas se releen una vez para guardar fechas por sucursal.", migradas)
+        log.info("Migración: %d películas se releen una vez en silencio.", migradas)
 
 
 def aplicar_modo_prueba(ctx, modo, filmid):
@@ -1030,11 +1158,12 @@ def aplicar_modo_prueba(ctx, modo, filmid):
         return
     if not ctx.estado["inicializado"]:
         raise SystemExit("Primero tiene que haber corrido al menos una vez en modo normal.")
-    if not filmid or not filmid.isdigit():
-        raise SystemExit(f"El modo {modo} necesita un filmid (número).")
+    if not filmid or not PATRON_ITEM.match(filmid):
+        raise SystemExit(f"El modo {modo} necesita un filmid (ej. 6028 o 6028-imax).")
     if modo == "simular-nueva":
-        ctx.peliculas.pop(filmid, None)
-        log.info("PRUEBA: olvidé la película %s; se va a avisar como nueva.", filmid)
+        for iid in [i for i, p in ctx.peliculas.items() if p.get("filmid") == filmid_de(filmid)]:
+            ctx.peliculas.pop(iid)
+        log.info("PRUEBA: olvidé la película %s; se va a avisar como nueva.", filmid_de(filmid))
     else:
         p = ctx.peliculas.get(filmid)
         if filmid not in ctx.seguidas or not p:
@@ -1079,17 +1208,31 @@ def correr(ctx, modo, filmid_prueba):
             log.info("Cartelera: %d películas.", len(cartelera))
             actualizar_presencia(ctx, cartelera)
 
-            # ¿Qué películas hay que abrir? Las nuevas, las seguidas y las que esperan fechas.
+            # ¿Qué películas hay que abrir? Las nuevas, las seguidas, las que no
+            # tienen funciones todavía y las ocultas (solo en sucursales inactivas),
+            # para enterarse si llegan a una activa.
+            # (Se trabaja por filmid: una página trae la versión normal y la IMAX.)
+            conocidos = {p.get("filmid") for p in ctx.peliculas.values()}
             a_leer = []
             for fid in cartelera:
-                if fid not in ctx.peliculas:
+                if fid not in conocidos:
                     agregar_unico(a_leer, fid)
-            for fid in ctx.seguidas:
+            for iid in ctx.seguidas:
+                agregar_unico(a_leer, filmid_de(iid))
+            for fid in ctx.estado.get("releer_silencioso", []):
                 agregar_unico(a_leer, fid)
-            for fid, p in ctx.peliculas.items():
-                esperando = p.get("esperando_primeras_fechas") or p.get("pendiente_aviso_nueva")
-                if p.get("rebasar") or (esperando and p.get("en_cartelera")):
-                    agregar_unico(a_leer, fid)
+            for p in ctx.peliculas.values():
+                revisar = p.get("esperando_primeras_fechas") or not es_visible(ctx, p)
+                if p.get("rebasar") or (revisar and p.get("en_cartelera")):
+                    agregar_unico(a_leer, p["filmid"])
+            # Revisión rotativa: además, unas pocas películas de la cartelera, las
+            # que hace más tiempo no se miran. Así se detecta, por ejemplo, que a
+            # una película le agregaron funciones IMAX.
+            lecturas = ctx.estado.get("lecturas", {})
+            rotativas = sorted((fid for fid in cartelera if fid not in a_leer),
+                               key=lambda fid: lecturas.get(fid, ""))
+            for fid in rotativas[:cfg["revisiones_extra_por_corrida"]]:
+                agregar_unico(a_leer, fid)
             log.info("Películas a revisar en detalle: %d.", len(a_leer))
 
             for i, fid in enumerate(a_leer):
@@ -1106,10 +1249,7 @@ def correr(ctx, modo, filmid_prueba):
                     log.error("   No pude leer la película %s: %s", fid, e)
                     fallidas.append(fid)
                     continue
-                try:
-                    procesar_pelicula(ctx, fid, cartelera.get(fid), resultado, inicial)
-                except ErrorTelegram as e:
-                    log.error("   No pude mandar el aviso de %s (%s). Se reintenta en la próxima corrida.", fid, e)
+                procesar_filmid(ctx, fid, cartelera.get(fid), resultado, inicial)
                 ctx.guardar()
         finally:
             browser.close()
@@ -1119,18 +1259,16 @@ def correr(ctx, modo, filmid_prueba):
         # (sin aviso) y se leen como "base" en la próxima.
         for fid in fallidas:
             if fid not in ctx.peliculas:
-                p = entrada_nueva(fid, cartelera.get(fid), {})
+                p = entrada_nueva(fid, "normal", cartelera.get(fid), {})
                 p["rebasar"] = True
                 ctx.peliculas[fid] = p
+                agregar_unico(ctx.estado.setdefault("releer_silencioso", []), fid)
         ctx.estado["inicializado"] = True
-        ctx.tg.enviar_mensaje(
-            f"✅ <b>Monitor de Showcase iniciado</b>\nRegistré {len(ctx.peliculas)} películas en cartelera "
-            "(no te aviso de cada una para no llenarte de mensajes). Desde ahora te aviso las novedades.\n\n"
-            f"Sucursales activas: {esc(ctx.nombre_complejos())}.\n\n"
-            "Mandá /cartelera para elegir qué películas seguir y /sucursales para elegir sucursales.")
 
     podar_fechas_viejas(ctx)
     ctx.guardar()
+    # Un solo mensaje por corrida, y solo si cambió algo (el primero siempre).
+    actualizar_panel(ctx)
 
     if a_leer and len(fallidas) == len(a_leer):
         raise ErrorScraping("no se pudo leer ninguna página de película")
