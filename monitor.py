@@ -714,48 +714,60 @@ def lineas_fechas_seguida(ctx, p):
     return lineas
 
 
+def asignar_numeros(ctx, iids):
+    """
+    Cada ítem recibe un número FIJO que no cambia entre paneles. Así /seguir12
+    siempre es la misma película, aunque toques el comando en un panel viejo.
+    """
+    numeros = ctx.estado.setdefault("numeros", {})
+    proximo = max(numeros.values(), default=0) + 1
+    for iid in iids:
+        if iid not in numeros:
+            numeros[iid] = proximo
+            proximo += 1
+    return numeros
+
+
+def item_por_numero(ctx, numero):
+    for iid, n in ctx.estado.get("numeros", {}).items():
+        if n == numero:
+            return iid
+    return None
+
+
 def armar_panel(ctx, visibles, nuevas, quitadas):
-    """Arma el texto del panel y sus botones (Telegram los pone siempre abajo)."""
+    """Arma el texto del panel. Para seguir/dejar se usan comandos (/seguir12,
+    /dejar12): se tocan en el texto y quedan registrados en el chat."""
     # Orden alfabético; "Batman" queda justo antes que "Batman (IMAX)".
     orden = sorted(visibles, key=lambda f: (ctx.peliculas[f]["titulo"].lower(), clave_item(f)))
-    numero = {fid: i for i, fid in enumerate(orden, 1)}
+    seguidas = sorted(ctx.seguidas, key=lambda f: ctx.seguidas[f].lower())
+    numeros = asignar_numeros(ctx, orden + seguidas)
 
     lineas = ["/sucursales - elegir de qué sucursal querés avisos",
               f"<i>Activas: {esc(ctx.nombre_complejos())}</i>",
               "", "<b>CARTELERA</b>", ""]
     if not orden:
         lineas.append("(no hay películas en tus sucursales activas)")
-    for fid in orden:
-        p = ctx.peliculas[fid]
+    for iid in orden:
+        p = ctx.peliculas[iid]
         etiquetas = f" [{esc(' · '.join(p['etiquetas']))}]" if p.get("etiquetas") else ""
-        seguida = " ⭐" if fid in ctx.seguidas else ""
-        nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if fid in nuevas else ""
-        lineas.append(f"{numero[fid]}. {esc(p['titulo'])}{etiquetas}{seguida}{nueva}")
+        nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if iid in nuevas else ""
+        accion = "⭐" if iid in ctx.seguidas else f"/seguir{numeros[iid]}"
+        lineas.append(f"- {esc(p['titulo'])}{etiquetas}{nueva}  {accion}")
 
-    seguidas = sorted(ctx.seguidas, key=lambda f: ctx.seguidas[f].lower())
     if seguidas:
         lineas += ["", "<b>SEGUIDAS</b>"]
-        for fid in seguidas:
-            p = ctx.peliculas.get(fid) or {}
-            lineas += ["", f"- <b>{esc(p.get('titulo') or ctx.seguidas[fid])}</b>"]
+        for iid in seguidas:
+            p = ctx.peliculas.get(iid) or {}
+            titulo = p.get("titulo") or ctx.seguidas[iid]
+            lineas += ["", f"- <b>{esc(titulo)}</b>  /dejar{numeros[iid]}"]
             lineas += lineas_fechas_seguida(ctx, p)
 
     if quitadas:
         lineas.append("")
         for titulo in sorted(quitadas):
             lineas.append(f"❌ Quitaron \"{esc(titulo)}\"")
-
-    # Botones: "Seguir N" para las no seguidas y "Dejar de seguir N" para las seguidas.
-    dejar = []
-    for fid in seguidas:
-        etiqueta = str(numero[fid]) if fid in numero else recortar(ctx.seguidas[fid], 20)
-        dejar.append({"text": f"Dejar de seguir {etiqueta}", "callback_data": f"dejar:{fid}|p"})
-    seguir_botones = [{"text": f"Seguir {numero[f]}", "callback_data": f"seguir:{f}|p"}
-                      for f in orden if f not in ctx.seguidas]
-    seguir_botones = seguir_botones[:max(0, 100 - len(dejar))]  # Telegram: máximo 100 botones
-    filas = [seguir_botones[i:i + 4] for i in range(0, len(seguir_botones), 4)]
-    filas += [dejar[i:i + 2] for i in range(0, len(dejar), 2)]
-    return "\n".join(lineas), filas
+    return "\n".join(lineas), None
 
 
 def actualizar_panel(ctx):
@@ -763,6 +775,10 @@ def actualizar_panel(ctx):
     panel = ctx.estado.setdefault("panel", {"enviado": False, "mostradas": []})
     visibles = {fid for fid, p in ctx.peliculas.items() if es_visible(ctx, p)}
     anteriores = set(panel.get("mostradas", []))
+    ocultas = sorted(p["titulo"] for iid, p in ctx.peliculas.items()
+                     if p.get("en_cartelera") and iid not in visibles)
+    if ocultas:
+        log.info("Ocultas (sin funciones en tus sucursales activas): %s", " | ".join(ocultas))
 
     if panel.get("enviado"):
         nuevas = {fid for fid in ctx.recien_visibles if fid in visibles}
@@ -797,6 +813,7 @@ def texto_ayuda(ctx):
         "película nueva o quitada, fechas nuevas en una seguida, o cuando tocás un botón.",
         "",
         "/cartelera – mandarme el panel ahora",
+        "/seguirN y /dejarN – aparecen en el panel al lado de cada película (tocalos)",
         "/sucursales – elegir de qué sucursales querés avisos",
         "/ayuda – este mensaje",
         "",
@@ -871,7 +888,16 @@ def procesar_update(ctx, update):
             return
         texto = (mensaje.get("text") or "").strip()
         comando = texto.split()[0].split("@")[0].lower() if texto else ""
-        if comando in ("/cartelera", "/seguidas"):
+        accion_peli = re.fullmatch(r"/(seguir|dejar)(\d+)", comando)
+        if accion_peli:
+            iid = item_por_numero(ctx, int(accion_peli.group(2)))
+            if iid is None:
+                log.info("Comando %s: ese número no corresponde a ninguna película.", comando)
+            elif accion_peli.group(1) == "seguir":
+                seguir(ctx, iid)
+            else:
+                dejar_de_seguir(ctx, iid)
+        elif comando in ("/cartelera", "/seguidas"):
             ctx.estado["panel_pendiente"] = True  # se manda al final de la corrida
         elif comando == "/sucursales":
             ctx.tg.enviar_mensaje("🏢 <b>Sucursales</b>\n✅ = activa (te aviso) · ❌ = inactiva\n"
@@ -964,7 +990,9 @@ def separar_por_variante(funciones):
     resultado = {}
     for dia, entradas in funciones.items():
         for e in entradas:
-            variante = "imax" if "IMAX" in (e.get("formato") or "").upper() else "normal"
+            # Es IMAX si el formato lo dice o si se proyecta en la sala IMAX Theatre (id 18).
+            es_imax = "IMAX" in (e.get("formato") or "").upper() or e.get("complejo_id") == "18"
+            variante = "imax" if es_imax else "normal"
             resultado.setdefault(variante, {}).setdefault(dia, []).append(e)
     return resultado
 
@@ -1008,6 +1036,12 @@ def procesar_filmid(ctx, filmid, info_cartelera, resultado, inicial):
     ids |= {item_id(filmid, v) for v in por_variante}
     if not ids:  # sin funciones en ningún lado (ej. anticipada): un ítem normal
         ids.add(item_id(filmid, "normal"))
+
+    # Diagnóstico en el log: en qué sucursales y formatos tiene funciones cada versión.
+    for variante, funciones in por_variante.items():
+        detalle = sorted({f"{NOMBRE_CORTO.get(e.get('complejo_id'), e.get('complejo'))} ({e.get('formato')})"
+                          for entradas in funciones.values() for e in entradas})
+        log.info("   %s: %s", variante, ", ".join(detalle))
 
     for iid in sorted(ids, key=clave_item):
         variante = variante_de(iid)
