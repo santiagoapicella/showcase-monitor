@@ -1,0 +1,38 @@
+{
+  "inicializado": true,
+  "ultimo_update_id": 815230417,
+  "fallos_seguidos": 0,
+  "ultimo_error": null,
+  "ultima_corrida_ok": "2026-10-13",
+  "peliculas": {
+    "5875": {
+      "titulo": "La Odisea",
+      "variantes": ["La Odisea"],
+      "etiquetas": ["IMAX"],
+      "nombre_web": "La Odisea",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-07T21:10:04-03:00",
+      "fechas_conocidas": {
+        "13": ["2026-10-13", "2026-10-14", "2026-10-15"],
+        "18": ["2026-10-13", "2026-10-14"]
+      },
+      "esperando_primeras_fechas": false,
+      "pendiente_aviso_nueva": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    },
+    "6030": {
+      "titulo": "Linkin Park: Unshattered",
+      "variantes": ["Linkin Park: Unshattered"],
+      "etiquetas": ["ANTICIPADA", "MUSIC"],
+      "nombre_web": "Linkin Park: Unshattered",
+      "en_cartelera": true,
+      "visto_por_primera_vez": "2026-10-07T21:10:04-03:00",
+      "fechas_conocidas": {},
+      "esperando_primeras_fechas": true,
+      "pendiente_aviso_nueva": false,
+      "rebasar": false,
+      "confirmar_seguimiento": false
+    }
+  }
+}

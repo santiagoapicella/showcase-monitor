@@ -1,0 +1,8 @@
+{
+  "complejos": ["Norcenter"],
+  "pausa_entre_paginas_seg": [2, 5],
+  "reintentos": 3,
+  "minimo_peliculas_esperadas": 5,
+  "avisar_tras_fallos_seguidos": 3,
+  "dias_a_conservar_fechas_pasadas": 7
+}
