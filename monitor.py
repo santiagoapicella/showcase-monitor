@@ -702,14 +702,16 @@ def lineas_fechas_seguida(ctx, p):
     lineas = []
     for d in fechas:
         tanda = tandas.get(d, 0)
-        if tanda == 0:
-            linea = f"    {formatear_fecha(d)}"
-        elif tanda == ultima:
-            linea = f"    {formatear_fecha(d)}  <b>{ETIQUETA_NUEVA}</b>"
-            if horarios.get(d):
-                linea += f"  ({esc(horarios[d])})"
-        else:
-            linea = f"    {formatear_fecha(d)}  <i>{ETIQUETA_ANTERIOR}</i>"
+        linea = f"    {formatear_fecha(d)}"
+        if tanda == ultima and tanda != 0:
+            linea += f"  <b>{ETIQUETA_NUEVA}</b>"
+        elif tanda != 0:
+            linea += f"  <i>{ETIQUETA_ANTERIOR}</i>"
+        # Horarios del día, solo funciones subtituladas.
+        if horarios.get(d):
+            linea += f"  ({esc(horarios[d])})"
+        elif horarios:
+            linea += "  (sin funciones subtituladas)"
         lineas.append(linea)
     return lineas
 
@@ -753,14 +755,14 @@ def armar_panel(ctx, visibles, nuevas, quitadas):
         etiquetas = f" [{esc(' · '.join(p['etiquetas']))}]" if p.get("etiquetas") else ""
         nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if iid in nuevas else ""
         accion = "⭐" if iid in ctx.seguidas else f"/seguir{numeros[iid]}"
-        lineas.append(f"- {esc(p['titulo'])}{etiquetas}{nueva}  {accion}")
+        lineas.append(f"{numeros[iid]}. {esc(p['titulo'])}{etiquetas}{nueva}  {accion}")
 
     if seguidas:
         lineas += ["", "<b>SEGUIDAS</b>"]
         for iid in seguidas:
             p = ctx.peliculas.get(iid) or {}
             titulo = p.get("titulo") or ctx.seguidas[iid]
-            lineas += ["", f"- <b>{esc(titulo)}</b>  /dejar{numeros[iid]}"]
+            lineas += ["", f"{numeros[iid]}. <b>{esc(titulo)}</b>  /dejar{numeros[iid]}"]
             lineas += lineas_fechas_seguida(ctx, p)
 
     if quitadas:
@@ -1134,8 +1136,15 @@ def iniciar_tandas(p, fechas):
 
 
 def guardar_horarios(p, mias):
-    """Guarda fecha -> resumen de horarios (solo sucursales activas), de la última lectura."""
-    p["horarios"] = {d: resumen_horarios(entradas) for d, entradas in sorted(mias.items())}
+    """
+    Guarda fecha -> resumen de horarios de la última lectura (solo sucursales
+    activas y solo funciones SUBTITULADAS). Una fecha que solo tiene funciones
+    dobladas queda con texto vacío y se muestra "sin funciones subtituladas".
+    """
+    p["horarios"] = {}
+    for d, entradas in sorted(mias.items()):
+        subtituladas = [e for e in entradas if "SUBT" in (e.get("formato") or "").upper()]
+        p["horarios"][d] = resumen_horarios(subtituladas)
 
 
 def actualizar_presencia(ctx, cartelera):
