@@ -1,11 +1,17 @@
 name: Monitor cartelera Showcase
 
+# Nombre de cada corrida en la pestaña Actions, según quién la disparó.
+run-name: >-
+  ${{ github.event_name == 'schedule' && '⏰ Automática (GitHub)'
+  || inputs.origen == 'cron-job' && '🤖 Automática (cron-job)'
+  || format('👤 Manual: {0}', inputs.modo || 'normal') }}
+
 on:
   schedule:
-    # Cada 30 minutos, en los minutos 3, 13, 23... (evita el minuto 0, el más
+    # Cada 10 minutos, en los minutos 3, 13, 23... (evita el minuto 0, el más
     # congestionado en GitHub). El horario de GitHub es UTC; con "cada 10 min" da igual.
     # GitHub no garantiza puntualidad: puede demorar algunos minutos o saltear corridas.
-    - cron: "3-59/30 * * * *"
+    - cron: "3-59/10 * * * *"
   workflow_dispatch:
     inputs:
       modo:
@@ -22,6 +28,10 @@ on:
         description: "filmid (solo para simular-nueva / simular-fecha). Para la versión IMAX: 6028-imax"
         type: string
         default: ""
+      origen:
+        description: "Quién lo dispara (dejalo en 'manual'; cron-job.org manda 'cron-job')"
+        type: string
+        default: manual
 
 # Permiso para commitear los archivos de estado.
 permissions:
