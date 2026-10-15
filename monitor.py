@@ -650,6 +650,25 @@ def fechas_por_sucursal(funciones):
 # Botones y textos de los mensajes
 # ---------------------------------------------------------------------------
 
+# Nombre de cada sucursal en los comandos /ActivarX y /DesactivarX.
+COMANDO_SUCURSAL = {"11": "Haedo", "12": "VillaCabrera", "13": "Norcenter", "14": "Belgrano",
+                    "15": "Quilmes", "16": "Rosario", "18": "IMAX"}
+
+
+def texto_sucursales(ctx):
+    inactivas = [s for s in SUCURSALES if s not in ctx.activas]
+    activas = [s for s in SUCURSALES if s in ctx.activas]
+    lineas = ["🏢 <b>Sucursales</b>",
+              "✅ = activa (te aviso) · ❌ = inactiva",
+              "Tocá un comando para cambiarla.", "",
+              "<b>❌ Inactivas</b>"]
+    lineas += [f"{esc(SUCURSALES[s])} /Activar{COMANDO_SUCURSAL[s]}" for s in inactivas] or ["(ninguna)"]
+    lineas += ["", "<b>✅ Activas</b>"]
+    lineas += [f"{esc(SUCURSALES[s])} /Desactivar{COMANDO_SUCURSAL[s]}" for s in activas] or ["(ninguna)"]
+    lineas += ["", "/Nohacernada"]
+    return "\n".join(lineas)
+
+
 def teclado_sucursales(ctx):
     filas = []
     for sid, nombre in SUCURSALES.items():
@@ -756,6 +775,7 @@ def armar_panel(ctx, visibles, nuevas, quitadas):
         nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if iid in nuevas else ""
         accion = "⭐" if iid in ctx.seguidas else f"/seguir{numeros[iid]}"
         lineas.append(f"{numeros[iid]}. {esc(p['titulo'])}{etiquetas}{nueva}  {accion}")
+    lineas += ["", f"<b>Total títulos: {len(orden)}</b>"]
 
     if seguidas:
         lineas += ["", "<b>SEGUIDAS</b>"]
@@ -902,8 +922,19 @@ def procesar_update(ctx, update):
         elif comando in ("/cartelera", "/seguidas"):
             ctx.estado["panel_pendiente"] = True  # se manda al final de la corrida
         elif comando == "/sucursales":
-            ctx.tg.enviar_mensaje("🏢 <b>Sucursales</b>\n✅ = activa (te aviso) · ❌ = inactiva\n"
-                                  "Tocá una para cambiarla.", teclado_sucursales(ctx))
+            ctx.tg.enviar_mensaje(texto_sucursales(ctx))
+        elif re.fullmatch(r"/(activar|desactivar)[a-z]+", comando):
+            # /ActivarHaedo, /DesactivarIMAX... (Telegram puede mandarlos en
+            # cualquier combinación de mayúsculas; acá ya vienen en minúscula).
+            activar = comando.startswith("/activar")
+            nombre = comando[len("/activar"):] if activar else comando[len("/desactivar"):]
+            sid = next((s for s, n in COMANDO_SUCURSAL.items() if n.lower() == nombre), None)
+            if sid:
+                poner_sucursal(ctx, sid, activar)
+            else:
+                log.info("Comando %s: no corresponde a ninguna sucursal.", comando)
+        elif comando == "/nohacernada":
+            log.info("/Nohacernada: no se cambia nada.")
         elif comando in ("/start", "/ayuda", "/help"):
             # Como mucho una ayuda por corrida, aunque haya varios /start acumulados.
             if not ctx.ayuda_enviada:
@@ -930,7 +961,20 @@ def seguir(ctx, filmid):
     log.info("Ahora se sigue %s (%s).", filmid, titulo)
 
 
+def poner_sucursal(ctx, sid, activa):
+    """Activa o desactiva una sucursal; el panel actualizado llega al final de la corrida."""
+    if (sid in ctx.activas) == activa:
+        return  # ya estaba así
+    if activa:
+        ctx.activas.add(sid)
+    else:
+        ctx.activas.discard(sid)
+    log.info("%s la sucursal %s.", "Activaste" if activa else "Desactivaste", SUCURSALES[sid])
+    ctx.estado["panel_pendiente"] = True
+
+
 def cambiar_sucursal(ctx, sid):
+    # Para los botones de mensajes viejos de /sucursales.
     if sid not in SUCURSALES:
         return
     if sid in ctx.activas:
