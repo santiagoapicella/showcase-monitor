@@ -407,7 +407,7 @@
     "6028": {
       "filmid": "6028",
       "variante": "normal",
-      "titulo": "Película 6028",
+      "titulo": "Queen Budapest",
       "variantes": [],
       "etiquetas": [],
       "nombre_web": "Queen Budapest",
@@ -879,14 +879,6 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "horarios": {
-        "2026-10-16": "Norcenter: 17:05, 19:45, 22:20",
-        "2026-10-17": "Norcenter: 14:30, 17:05, 19:45, 22:20",
-        "2026-10-18": "Norcenter: 14:30, 17:05, 19:45, 22:20",
-        "2026-10-19": "Norcenter: 14:30, 17:05, 19:45, 22:20",
-        "2026-10-20": "Norcenter: 14:30, 17:05, 19:45, 22:20",
-        "2026-10-21": "Norcenter: 14:30, 17:05, 19:45, 22:20"
-      },
       "tandas": {
         "2026-10-15": 0,
         "2026-10-16": 0,
@@ -896,12 +888,164 @@
         "2026-10-20": 0,
         "2026-10-21": 0
       },
-      "ultima_tanda": 0
+      "ultima_tanda": 0,
+      "funciones": {
+        "2026-10-16": [
+          {
+            "suc": "Norcenter",
+            "hora": "17:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "19:45",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:20",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-17": [
+          {
+            "suc": "Norcenter",
+            "hora": "14:30",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "19:45",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:20",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-18": [
+          {
+            "suc": "Norcenter",
+            "hora": "14:30",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "19:45",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:20",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-19": [
+          {
+            "suc": "Norcenter",
+            "hora": "14:30",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "19:45",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:20",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-20": [
+          {
+            "suc": "Norcenter",
+            "hora": "14:30",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "19:45",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:20",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-21": [
+          {
+            "suc": "Norcenter",
+            "hora": "14:30",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "19:45",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:20",
+            "trasnoche": false,
+            "sub": true
+          }
+        ]
+      }
     },
     "6111": {
       "filmid": "6111",
       "variante": "normal",
-      "titulo": "Película 6111",
+      "titulo": "Escondida en mi cabeza",
       "variantes": [],
       "etiquetas": [],
       "nombre_web": "Escondida en mi cabeza",
@@ -2057,15 +2201,6 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "horarios": {
-        "2026-10-22": "Norcenter: 15:05, 17:40, 20:10, 22:35",
-        "2026-10-23": "Norcenter: 15:05, 17:40, 20:10, 22:35",
-        "2026-10-24": "Norcenter: 15:05, 17:40, 20:10, 22:35",
-        "2026-10-25": "Norcenter: 15:05, 17:40, 20:10, 22:35",
-        "2026-10-26": "Norcenter: 15:05, 17:40, 20:10, 22:35",
-        "2026-10-27": "Norcenter: 15:05, 17:40, 20:10, 22:35",
-        "2026-10-28": "Norcenter: 15:05, 17:40, 20:10, 22:35"
-      },
       "tandas": {
         "2026-10-22": 0,
         "2026-10-23": 0,
@@ -2075,7 +2210,191 @@
         "2026-10-27": 0,
         "2026-10-28": 0
       },
-      "ultima_tanda": 0
+      "ultima_tanda": 0,
+      "funciones": {
+        "2026-10-22": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-23": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-24": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-25": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-26": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-27": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ],
+        "2026-10-28": [
+          {
+            "suc": "Norcenter",
+            "hora": "15:05",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "17:40",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "20:10",
+            "trasnoche": false,
+            "sub": true
+          },
+          {
+            "suc": "Norcenter",
+            "hora": "22:35",
+            "trasnoche": false,
+            "sub": true
+          }
+        ]
+      }
     },
     "6214": {
       "filmid": "6214",
@@ -2129,18 +2448,18 @@
     "6192": "2026-10-16T16:32:02-03:00",
     "6194": "2026-10-16T17:02:07-03:00",
     "6193": "2026-10-16T17:02:17-03:00",
-    "6195": "2026-10-16T17:02:03-03:00",
+    "6195": "2026-10-16T17:06:07-03:00",
     "6101": "2026-10-16T17:02:21-03:00",
     "5875": "2026-10-16T17:02:12-03:00",
     "6155": "2026-10-14T22:32:22-03:00",
     "6159": "2026-10-16T17:02:25-03:00",
-    "6157": "2026-10-16T16:11:41-03:00",
-    "6156": "2026-10-16T16:21:23-03:00",
-    "6154": "2026-10-16T16:21:27-03:00",
-    "6102": "2026-10-16T17:01:48-03:00",
+    "6157": "2026-10-16T17:06:13-03:00",
+    "6156": "2026-10-16T17:06:22-03:00",
+    "6154": "2026-10-16T17:06:26-03:00",
+    "6102": "2026-10-16T17:05:53-03:00",
     "6112": "2026-10-14T22:32:01-03:00",
-    "6017": "2026-10-16T17:01:59-03:00",
-    "6083": "2026-10-16T16:21:31-03:00",
+    "6017": "2026-10-16T17:06:02-03:00",
+    "6083": "2026-10-16T17:06:31-03:00",
     "6082": "2026-10-16T16:21:34-03:00",
     "6060": "2026-10-16T16:21:39-03:00",
     "5984": "2026-10-16T16:31:52-03:00",
@@ -2150,9 +2469,9 @@
     "6158": "2026-10-16T16:32:05-03:00",
     "6114": "2026-10-16T16:32:10-03:00",
     "6016": "2026-10-16T16:41:20-03:00",
-    "5927": "2026-10-16T16:11:46-03:00",
+    "5927": "2026-10-16T17:06:19-03:00",
     "6203": "2026-10-16T16:41:33-03:00",
-    "6209": "2026-10-16T17:01:53-03:00",
+    "6209": "2026-10-16T17:05:58-03:00",
     "6214": "2026-10-16T16:41:38-03:00"
   },
   "panel": {
@@ -2191,44 +2510,65 @@
       "6203",
       "6209",
       "6214"
-    ]
-  },
-  "numeros": {
-    "6155": 1,
-    "6076": 2,
-    "6076-imax": 3,
-    "6016": 4,
-    "6159": 5,
-    "5984": 6,
-    "6101": 7,
-    "6101-imax": 8,
-    "6083": 9,
-    "6194": 10,
-    "6114": 11,
-    "6157": 12,
-    "6156": 13,
-    "6191": 14,
-    "5927": 15,
-    "6082": 16,
-    "5875": 17,
-    "5875-imax": 18,
-    "6158": 19,
-    "6169": 20,
-    "6170": 21,
-    "6171": 22,
-    "6172": 23,
-    "6154": 24,
-    "6028": 25,
-    "6192": 26,
-    "6060": 27,
-    "5845": 28,
-    "6177": 29,
-    "6177-imax": 30,
-    "6193": 31,
-    "6102": 32,
-    "6209": 33,
-    "6214": 34,
-    "6203": 35
+    ],
+    "comandos": {
+      "seguir": {
+        "al": "6076",
+        "al_imax": "6076-imax",
+        "aebiv": "6016",
+        "c20a": "6159",
+        "cva": "5984",
+        "d": "6101",
+        "d_imax": "6101-imax",
+        "cob": "6083",
+        "em": "6194",
+        "gdm2lte": "6114",
+        "hpi": "6157",
+        "ca": "6156",
+        "cab": "6191",
+        "i": "5927",
+        "io": "6082",
+        "o": "5875",
+        "o_imax": "5875-imax",
+        "vea": "6158",
+        "ljdh": "6169",
+        "ljdhl": "6170",
+        "ljdhsp1": "6171",
+        "ljdhsp2": "6172",
+        "ms": "6154",
+        "obsbttb": "6214",
+        "qts": "6192",
+        "renc": "6060",
+        "smund": "5845",
+        "sf": "6177",
+        "sf_imax": "6177-imax",
+        "ti": "6193",
+        "qsmh": "6203"
+      },
+      "dejar": {
+        "cl": "6209",
+        "vsue": "6102"
+      }
+    },
+    "fechas_seguidas": {
+      "6102": [
+        "2026-10-16",
+        "2026-10-17",
+        "2026-10-18",
+        "2026-10-19",
+        "2026-10-20",
+        "2026-10-21"
+      ],
+      "6209": [
+        "2026-10-22",
+        "2026-10-23",
+        "2026-10-24",
+        "2026-10-25",
+        "2026-10-26",
+        "2026-10-27",
+        "2026-10-28"
+      ]
+    }
   },
   "panel_pendiente": false
 }
