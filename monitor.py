@@ -509,7 +509,9 @@ def leer_cartelera(navegador):
 
     resultado = {}
     for filmid, p in peliculas.items():
-        titulo = (p["titulos_caja"] or p["variantes"] or [f"Película {filmid}"])[0]
+        # Puede quedar vacío si la película solo aparece como imagen (carrusel,
+        # pop-up). En ese caso se conserva el título que ya se conocía.
+        titulo = (p["titulos_caja"] or p["variantes"] or [""])[0]
         variantes = p["variantes"][:]
         for t in p["titulos_caja"]:
             agregar_unico(variantes, t)
@@ -707,89 +709,165 @@ def es_visible(ctx, p):
 
 
 def lineas_fechas_seguida(ctx, p):
-    hoy_iso = hoy().isoformat()
-    horarios = p.get("horarios") or {}
-    if horarios:  # fechas de la última lectura (lo más fiel a la web)
-        fechas = sorted(d for d in horarios if d >= hoy_iso)
-    else:
-        fechas = sorted({d for sid in ctx.activas for d in (p.get("fechas_conocidas") or {}).get(sid, [])
-                         if d >= hoy_iso})
-    if not fechas:
-        return ["    (todavía sin funciones en tus sucursales)"]
+    """Fechas con funciones que todavía no empezaron, con horarios subtitulados."""
+    vigentes = funciones_vigentes(p)
+    if not vigentes:
+        return ["    (sin funciones disponibles en tus sucursales)"]
     ultima = p.get("ultima_tanda", 0)
     tandas = p.get("tandas") or {}
     lineas = []
-    for d in fechas:
+    for d in sorted(vigentes):
         tanda = tandas.get(d, 0)
         linea = f"    {formatear_fecha(d)}"
         if tanda == ultima and tanda != 0:
             linea += f"  <b>{ETIQUETA_NUEVA}</b>"
         elif tanda != 0:
             linea += f"  <i>{ETIQUETA_ANTERIOR}</i>"
-        # Horarios del día, solo funciones subtituladas.
-        if horarios.get(d):
-            linea += f"  ({esc(horarios[d])})"
-        elif horarios:
+        # Horarios del día que todavía no empezaron, solo funciones subtituladas.
+        por_sucursal = {}
+        for f in vigentes[d]:
+            if f.get("sub"):
+                hora = f["hora"] + (" (trasnoche)" if f.get("trasnoche") else "")
+                agregar_unico(por_sucursal.setdefault(f["suc"], []), hora)
+        if por_sucursal:
+            linea += "  (" + esc(" · ".join(f"{s}: {', '.join(hs)}" for s, hs in por_sucursal.items())) + ")"
+        else:
             linea += "  (sin funciones subtituladas)"
         lineas.append(linea)
     return lineas
 
 
-def asignar_numeros(ctx, iids):
-    """
-    Cada ítem recibe un número FIJO que no cambia entre paneles. Así /seguir12
-    siempre es la misma película, aunque toques el comando en un panel viejo.
-    """
-    numeros = ctx.estado.setdefault("numeros", {})
-    proximo = max(numeros.values(), default=0) + 1
-    for iid in iids:
-        if iid not in numeros:
-            numeros[iid] = proximo
-            proximo += 1
-    return numeros
+# Palabras que no cuentan para el código de los comandos.
+CONECTORES = {"y", "de", "la", "el", "en", "a"}
 
 
-def item_por_numero(ctx, numero):
-    for iid, n in ctx.estado.get("numeros", {}).items():
-        if n == numero:
-            return iid
-    return None
+def palabras_titulo(titulo):
+    """'Rápidos y Furiosos 2' -> ['Rapidos', 'Furiosos', '2'] (sin tildes ni conectores)."""
+    palabras = re.findall(r"[A-Za-z0-9]+", "".join(
+        c for c in unicodedata.normalize("NFD", titulo) if unicodedata.category(c) != "Mn"))
+    return [w for w in palabras if w.lower() not in CONECTORES] or ["X"]
+
+
+def codigo_base(palabras, largo_primera):
+    """Inicial de cada palabra (números enteros); la primera, con `largo_primera` letras."""
+    partes = []
+    for i, w in enumerate(palabras):
+        if w.isdigit():
+            partes.append(w)
+        elif i == 0:
+            partes.append(w[0].upper() + w[1:largo_primera].lower())
+        else:
+            partes.append(w[0].upper())
+    return "".join(partes)
+
+
+def titulo_base(ctx, iid):
+    """Título sin el "(IMAX)" que se le agrega a la versión IMAX."""
+    titulo = (ctx.peliculas.get(iid) or {}).get("titulo") or ctx.seguidas.get(iid, "")
+    return re.sub(r"\s*\(IMAX\)$", "", titulo)
+
+
+def titulo_panel(ctx, iid):
+    """Cómo se muestra en el panel: 'Queen Budapest' o 'Queen Budapest [IMAX]'."""
+    base = titulo_base(ctx, iid)
+    return f"{base} [IMAX]" if variante_de(iid) == "imax" else base
+
+
+def calcular_codigos(ctx, iids):
+    """
+    Códigos de comando mínimos y sin repetir: 'Rápidos y Furiosos' -> RF,
+    'Dune 2' -> D2. Si chocan (Alicia/Almendra -> A), se extienden TODOS los
+    involucrados con letras de la primera palabra lo justo para diferenciarse:
+    Ali, Alm (y An para Antídoto). Telegram no distingue mayúsculas en los
+    comandos, así que la comparación es en minúscula.
+    Las versiones IMAX usan el código del título sin "(IMAX)" más "_IMAX"
+    (Queen Budapest IMAX -> QB_IMAX); solo chocan con otras versiones IMAX.
+    """
+    palabras = {iid: palabras_titulo(titulo_base(ctx, iid)) for iid in iids}
+    largo = {iid: 1 for iid in iids}
+    codigos = {}
+    for _ in range(50):
+        codigos = {iid: codigo_base(palabras[iid], largo[iid]) for iid in iids}
+        grupos = {}
+        for iid, c in codigos.items():
+            grupos.setdefault((c.lower(), variante_de(iid)), []).append(iid)
+        choques = [g for g in grupos.values() if len(g) > 1]
+        if not choques:
+            break
+        avanzo = False
+        for grupo in choques:
+            for iid in grupo:
+                primera = palabras[iid][0].lower()
+                otras = [palabras[o][0].lower() for o in grupo if o != iid]
+                # El prefijo más corto de la primera palabra que ninguna otra comparte.
+                k = largo[iid] + 1
+                while k <= len(primera) and any(o[:k] == primera[:k] for o in otras):
+                    k += 1
+                k = min(k, len(primera))
+                if k > largo[iid]:
+                    largo[iid] = k
+                    avanzo = True
+        if not avanzo:
+            break
+    # Último recurso (primeras palabras idénticas): numerar los que sigan repetidos.
+    vistos = {}
+    for iid in sorted(iids, key=clave_item):
+        c = codigos[iid]
+        clave = (c.lower(), variante_de(iid))
+        vistos[clave] = vistos.get(clave, 0) + 1
+        if vistos[clave] > 1:
+            codigos[iid] = f"{c}{vistos[clave]}"
+    # Guion bajo y no punto: Telegram corta los comandos en el punto.
+    return {iid: c + ("_IMAX" if variante_de(iid) == "imax" else "") for iid, c in codigos.items()}
 
 
 def armar_panel(ctx, visibles, nuevas, quitadas):
-    """Arma el texto del panel. Para seguir/dejar se usan comandos (/seguir12,
-    /dejar12): se tocan en el texto y quedan registrados en el chat."""
+    """
+    Arma el texto del panel. Devuelve (texto, comandos), donde comandos son los
+    que aparecen en ESTE panel: {"seguir": {"rf": iid}, "dejar": {"ali": iid}}.
+    Solo esos se aceptan después (los de paneles viejos se ignoran).
+    """
     # Orden alfabético; "Batman" queda justo antes que "Batman (IMAX)".
     orden = sorted(visibles, key=lambda f: (ctx.peliculas[f]["titulo"].lower(), clave_item(f)))
-    seguidas = sorted(ctx.seguidas, key=lambda f: ctx.seguidas[f].lower())
-    numeros = asignar_numeros(ctx, orden + seguidas)
+    seguidas = sorted(ctx.seguidas, key=lambda f: (ctx.seguidas[f].lower(), clave_item(f)))
+    codigos = calcular_codigos(ctx, list(dict.fromkeys(orden + seguidas)))
+    comandos = {"seguir": {}, "dejar": {}}
 
     lineas = ["/sucursales - elegir de qué sucursal querés avisos",
               f"<i>Activas: {esc(ctx.nombre_complejos())}</i>",
-              "", "<b>CARTELERA</b>", ""]
+              "", "<b>CARTELERA</b>"]
+    if nuevas:
+        titulos = sorted(titulo_panel(ctx, i) for i in nuevas)
+        lineas.append("➕ Agregamos: " + esc(", ".join(titulos)))
+    if quitadas:
+        lineas.append("➖ Quitamos: " + esc(", ".join(sorted(quitadas))))
+    lineas.append("")
     if not orden:
         lineas.append("(no hay películas en tus sucursales activas)")
-    for iid in orden:
-        p = ctx.peliculas[iid]
-        etiquetas = f" [{esc(' · '.join(p['etiquetas']))}]" if p.get("etiquetas") else ""
+    for n, iid in enumerate(orden, 1):
+        # Sin etiquetas (ESTRENO, ANTICIPADA...): alcanza con "nueva". Solo [IMAX].
         nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if iid in nuevas else ""
-        accion = "⭐" if iid in ctx.seguidas else f"/seguir{numeros[iid]}"
-        lineas.append(f"{numeros[iid]}. {esc(p['titulo'])}{etiquetas}{nueva}  {accion}")
+        if iid in ctx.seguidas:
+            accion = "⭐"
+        else:
+            accion = f"/seguir{codigos[iid]}"
+            comandos["seguir"][codigos[iid].lower()] = iid
+        lineas.append(f"{n}. {esc(titulo_panel(ctx, iid))}{nueva}  {accion}")
     lineas += ["", f"<b>Total títulos: {len(orden)}</b>"]
 
     if seguidas:
         lineas += ["", "<b>SEGUIDAS</b>"]
-        for iid in seguidas:
+        for n, iid in enumerate(seguidas, 1):
             p = ctx.peliculas.get(iid) or {}
-            titulo = p.get("titulo") or ctx.seguidas[iid]
-            lineas += ["", f"{numeros[iid]}. <b>{esc(titulo)}</b>  /dejar{numeros[iid]}"]
+            comandos["dejar"][codigos[iid].lower()] = iid
+            lineas += ["", f"{n}. <b>{esc(titulo_panel(ctx, iid))}</b>  /dejar{codigos[iid]}"]
             lineas += lineas_fechas_seguida(ctx, p)
+    return "\n".join(lineas), comandos
 
-    if quitadas:
-        lineas.append("")
-        for titulo in sorted(quitadas):
-            lineas.append(f"❌ Quitaron \"{esc(titulo)}\"")
-    return "\n".join(lineas), None
+
+def fechas_mostradas_seguidas(ctx):
+    """{iid: [fechas]} que el panel mostraría ahora para cada película seguida."""
+    return {iid: sorted(funciones_vigentes(ctx.peliculas.get(iid) or {})) for iid in ctx.seguidas}
 
 
 def actualizar_panel(ctx):
@@ -802,20 +880,30 @@ def actualizar_panel(ctx):
     if ocultas:
         log.info("Ocultas (sin funciones en tus sucursales activas): %s", " | ".join(ocultas))
 
+    fechas_seguidas = fechas_mostradas_seguidas(ctx)
+    if panel.get("enviado") and "comandos" not in panel:
+        # Primer panel con comandos por código (/seguirRF): se manda una vez
+        # para que los comandos del panel anterior (/seguir12) dejen de usarse.
+        ctx.estado["panel_pendiente"] = True
     if panel.get("enviado"):
         nuevas = {fid for fid in ctx.recien_visibles if fid in visibles}
-        quitadas = [ctx.peliculas[fid]["titulo"] for fid in anteriores
+        quitadas = [titulo_panel(ctx, fid) for fid in anteriores
                     if fid in ctx.peliculas and not ctx.peliculas[fid].get("en_cartelera")]
-        if not (nuevas or quitadas or ctx.estado.get("panel_pendiente")):
+        # ¿A alguna seguida se le terminó una fecha (pasaron todas sus funciones)?
+        # Que pase un horario suelto no alcanza; que desaparezca una fecha entera, sí.
+        antes = panel.get("fechas_seguidas", {})
+        fecha_terminada = any(set(antes.get(iid, [])) - set(fechas_seguidas.get(iid, []))
+                              for iid in fechas_seguidas)
+        if not (nuevas or quitadas or fecha_terminada or ctx.estado.get("panel_pendiente")):
             log.info("Sin cambios: no mando nada.")
             return
     else:
         nuevas, quitadas = set(), []  # primer panel: sin marcas
 
-    texto, botones = armar_panel(ctx, visibles, nuevas, quitadas)
+    texto, comandos = armar_panel(ctx, visibles, nuevas, quitadas)
     log.info("Mando el panel (%d nuevas, %d quitadas).", len(nuevas), len(quitadas))
     try:
-        ctx.tg.enviar_mensaje(texto, botones)
+        ctx.tg.enviar_mensaje(texto)
     except ErrorTelegram as e:
         log.error("No pude mandar el panel (%s). Se reintenta en la próxima corrida.", e)
         ctx.estado["panel_pendiente"] = True
@@ -823,7 +911,10 @@ def actualizar_panel(ctx):
         return
     panel["enviado"] = True
     panel["mostradas"] = sorted(visibles, key=clave_item)
+    panel["comandos"] = comandos  # solo se aceptan los comandos de este último panel
+    panel["fechas_seguidas"] = fechas_seguidas
     ctx.estado["panel_pendiente"] = False
+    ctx.estado.pop("numeros", None)  # numeración fija de una versión anterior
     ctx.guardar()
 
 
@@ -835,7 +926,8 @@ def texto_ayuda(ctx):
         "película nueva o quitada, fechas nuevas en una seguida, o cuando tocás un botón.",
         "",
         "/cartelera – mandarme el panel ahora",
-        "/seguirN y /dejarN – aparecen en el panel al lado de cada película (tocalos)",
+        "/seguirXX y /dejarXX – aparecen en el panel al lado de cada película (tocalos). "
+        "Solo valen los del último panel.",
         "/sucursales – elegir de qué sucursales querés avisos",
         "/ayuda – este mensaje",
         "",
@@ -910,12 +1002,17 @@ def procesar_update(ctx, update):
             return
         texto = (mensaje.get("text") or "").strip()
         comando = texto.split()[0].split("@")[0].lower() if texto else ""
-        accion_peli = re.fullmatch(r"/(seguir|dejar)(\d+)", comando)
+        accion_peli = re.fullmatch(r"/(seguir|dejar)([a-z0-9_]+)", comando)
         if accion_peli:
-            iid = item_por_numero(ctx, int(accion_peli.group(2)))
+            # Solo valen los comandos que aparecen en el ÚLTIMO panel enviado.
+            # Cualquier otro (de un panel viejo, o inventado como /seguirkillbill)
+            # se ignora sin responder.
+            accion, codigo = accion_peli.groups()
+            validos = (ctx.estado.get("panel") or {}).get("comandos", {}).get(accion, {})
+            iid = validos.get(codigo)
             if iid is None:
-                log.info("Comando %s: ese número no corresponde a ninguna película.", comando)
-            elif accion_peli.group(1) == "seguir":
+                log.info("Comando %s: no está en el último panel, lo ignoro.", comando)
+            elif accion == "seguir":
                 seguir(ctx, iid)
             else:
                 dejar_de_seguir(ctx, iid)
@@ -1181,14 +1278,44 @@ def iniciar_tandas(p, fechas):
 
 def guardar_horarios(p, mias):
     """
-    Guarda fecha -> resumen de horarios de la última lectura (solo sucursales
-    activas y solo funciones SUBTITULADAS). Una fecha que solo tiene funciones
-    dobladas queda con texto vacío y se muestra "sin funciones subtituladas".
+    Guarda las funciones de la última lectura (solo sucursales activas), una por
+    una, para poder descartar las que ya empezaron:
+    {"2026-10-20": [{"suc": "Norcenter", "hora": "15:30", "trasnoche": false, "sub": true}, ...]}
     """
-    p["horarios"] = {}
+    p.pop("horarios", None)  # formato de una versión anterior
+    p["funciones"] = {}
     for d, entradas in sorted(mias.items()):
-        subtituladas = [e for e in entradas if "SUBT" in (e.get("formato") or "").upper()]
-        p["horarios"][d] = resumen_horarios(subtituladas)
+        lista = []
+        for e in entradas:
+            sub = "SUBT" in (e.get("formato") or "").upper()
+            suc = NOMBRE_CORTO.get(e.get("complejo_id"), e.get("complejo", "?"))
+            for h in e["horarios"]:
+                lista.append({"suc": suc, "hora": h.split()[0], "trasnoche": "trasnoche" in h, "sub": sub})
+        p["funciones"][d] = lista
+
+
+def inicio_funcion(dia, f):
+    """Fecha y hora de inicio. Las de trasnoche (ej. 00:30) son de la madrugada siguiente."""
+    try:
+        hh, mm = (int(x) for x in f["hora"].split(":")[:2])
+    except ValueError:
+        return None
+    inicio = datetime.combine(date.fromisoformat(dia), datetime.min.time(), tzinfo=ZONA)
+    inicio += timedelta(hours=hh, minutes=mm)
+    if f.get("trasnoche"):
+        inicio += timedelta(days=1)
+    return inicio
+
+
+def funciones_vigentes(p):
+    """{fecha: [funciones que todavía no empezaron]}; las fechas sin ninguna desaparecen."""
+    ahora = datetime.now(ZONA)
+    vigentes = {}
+    for dia, funciones in (p.get("funciones") or {}).items():
+        quedan = [f for f in funciones if (inicio_funcion(dia, f) or ahora) >= ahora]
+        if quedan:
+            vigentes[dia] = quedan
+    return vigentes
 
 
 def actualizar_presencia(ctx, cartelera):
@@ -1196,12 +1323,17 @@ def actualizar_presencia(ctx, cartelera):
     for iid, p in ctx.peliculas.items():
         info = cartelera.get(p.get("filmid", filmid_de(iid)))
         p["en_cartelera"] = info is not None
-        if info:
-            p["titulo"] = titulo_item(info["titulo"], p.get("variante", "normal"))
+        variante = p.get("variante", "normal")
+        if info and info["titulo"]:
+            p["titulo"] = titulo_item(info["titulo"], variante)
             p["variantes"] = info["variantes"]
+        if info:
             p["etiquetas"] = [e for e in info["etiquetas"] if e != "IMAX"]
-            if iid in ctx.seguidas:
-                ctx.seguidas[iid] = p["titulo"]
+        # Reparar títulos provisorios que quedaron de versiones anteriores.
+        if re.fullmatch(r"Película \d+( \(IMAX\))?", p.get("titulo", "")) and p.get("nombre_web"):
+            p["titulo"] = titulo_item(p["nombre_web"], variante)
+        if iid in ctx.seguidas:
+            ctx.seguidas[iid] = p["titulo"]
 
 
 def podar_fechas_viejas(ctx):
