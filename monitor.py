@@ -845,9 +845,9 @@ def armar_panel(ctx, visibles, nuevas, quitadas):
               "", "<b>CARTELERA</b>"]
     if nuevas:
         titulos = sorted(titulo_panel(ctx, i) for i in nuevas)
-        lineas.append("➕ Agregamos: " + esc(", ".join(titulos)))
+        lineas.append("✅ Agregamos: " + esc(", ".join(titulos)))
     if quitadas:
-        lineas.append("➖ Quitamos: " + esc(", ".join(sorted(quitadas))))
+        lineas.append("❌ Quitamos: " + esc(", ".join(sorted(quitadas))))
     lineas.append("")
     if not orden:
         lineas.append("(no hay películas en tus sucursales activas)")
