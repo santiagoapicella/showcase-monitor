@@ -365,6 +365,7 @@ class Contexto:
         self.simulacro = simulacro
         self.ayuda_enviada = False
         self.recien_visibles = set()  # películas que aparecieron en esta corrida
+        self.cambio_sucursales = False  # se activó/desactivó alguna sucursal en esta corrida
 
     @property
     def peliculas(self):
@@ -893,8 +894,14 @@ def actualizar_panel(ctx):
         ctx.estado["panel_pendiente"] = True
     if panel.get("enviado"):
         nuevas = {fid for fid in ctx.recien_visibles if fid in visibles}
-        quitadas = [titulo_panel(ctx, fid) for fid in anteriores
-                    if fid in ctx.peliculas and not ctx.peliculas[fid].get("en_cartelera")]
+        # Quitada = estaba en el panel anterior y ya no está (salió de la web, o
+        # ya no tiene funciones en tus sucursales). Si en esta corrida cambiaste
+        # de sucursales, no se listan: el panel llega igual, pero sin una lista
+        # enorme de agregadas/quitadas por el cambio de filtro.
+        if ctx.cambio_sucursales:
+            quitadas, nuevas = [], set()
+        else:
+            quitadas = [titulo_panel(ctx, fid) for fid in anteriores - visibles if fid in ctx.peliculas]
         # ¿A alguna seguida se le terminó una fecha (pasaron todas sus funciones)?
         # Que pase un horario suelto no alcanza; que desaparezca una fecha entera, sí.
         antes = panel.get("fechas_seguidas", {})
@@ -1073,6 +1080,7 @@ def poner_sucursal(ctx, sid, activa):
     else:
         ctx.activas.discard(sid)
     log.info("%s la sucursal %s.", "Activaste" if activa else "Desactivaste", SUCURSALES[sid])
+    ctx.cambio_sucursales = True
     ctx.estado["panel_pendiente"] = True
 
 
@@ -1087,6 +1095,7 @@ def cambiar_sucursal(ctx, sid):
         ctx.activas.add(sid)
         accion = "✅ Activaste"
     log.info("%s la sucursal %s.", accion, SUCURSALES[sid])
+    ctx.cambio_sucursales = True
     ctx.estado["panel_pendiente"] = True
 
 
