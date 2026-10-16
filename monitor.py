@@ -702,10 +702,16 @@ def es_visible(ctx, p):
     activas, o si todavía no tiene funciones en ningún lado (ej. anticipada)."""
     if not p.get("en_cartelera"):
         return False
-    conocidas = p.get("fechas_conocidas") or {}
-    if not conocidas:
+    # Se usan las fechas de la ÚLTIMA lectura (no las acumuladas, que guardan
+    # fechas que el cine ya sacó), y solo de hoy en adelante.
+    actuales = p.get("fechas_actuales")
+    if actuales is None:  # ítem de una versión anterior, todavía no releído
+        actuales = p.get("fechas_conocidas") or {}
+    hoy_iso = hoy().isoformat()
+    vigentes = {sid for sid, fechas in actuales.items() if any(f >= hoy_iso for f in fechas)}
+    if not vigentes:
         return bool(p.get("esperando_primeras_fechas"))
-    return any(sid in ctx.activas for sid in conocidas)
+    return bool(vigentes & ctx.activas)
 
 
 def lineas_fechas_seguida(ctx, p):
@@ -1213,6 +1219,7 @@ def procesar_item(ctx, iid, filmid, variante, info_cartelera, resultado, silenci
     if p is None:
         p = entrada_nueva(filmid, variante, info_cartelera, resultado)
         p["fechas_conocidas"] = unir_fechas({}, actuales)
+        p["fechas_actuales"] = unir_fechas({}, actuales)
         # Sin funciones en ningún lado (ej. anticipada): se muestra y se sigue revisando.
         p["esperando_primeras_fechas"] = not hay_funciones
         # Si solo tiene funciones en sucursales inactivas, queda oculto (no se
@@ -1227,6 +1234,8 @@ def procesar_item(ctx, iid, filmid, variante, info_cartelera, resultado, silenci
         return
 
     oculta_antes = not es_visible(ctx, p)
+    # Fechas de esta lectura (reemplazan a las anteriores; deciden si se muestra).
+    p["fechas_actuales"] = unir_fechas({}, actuales)
     if resultado.get("nombre_web"):
         p["nombre_web"] = resultado["nombre_web"]
     if iid in ctx.seguidas:
@@ -1441,7 +1450,8 @@ def correr(ctx, modo, filmid_prueba):
             for fid in ctx.estado.get("releer_silencioso", []):
                 agregar_unico(a_leer, fid)
             for p in ctx.peliculas.values():
-                revisar = p.get("esperando_primeras_fechas") or not es_visible(ctx, p)
+                revisar = (p.get("esperando_primeras_fechas") or not es_visible(ctx, p)
+                           or "fechas_actuales" not in p)  # versión anterior: releer una vez
                 if p.get("rebasar") or (revisar and p.get("en_cartelera")):
                     agregar_unico(a_leer, p["filmid"])
             # Revisión rotativa: además, unas pocas películas de la cartelera, las
