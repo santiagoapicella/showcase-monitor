@@ -14,7 +14,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Spider-Man: un nuevo día",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:47:00-03:00",
       "fechas_conocidas": {
         "11": [
@@ -89,7 +89,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "La Odisea",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:45:44-03:00",
       "fechas_conocidas": {
         "18": [
@@ -130,7 +130,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "La Odisea",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:45:44-03:00",
       "fechas_conocidas": {
         "11": [
@@ -222,7 +222,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "La invitación",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:47:22-03:00",
       "fechas_conocidas": {
         "13": [
@@ -334,7 +334,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Coyote vs ACME",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:46:45-03:00",
       "fechas_conocidas": {
         "11": [
@@ -435,7 +435,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Avengers Endgame: Bonus - INFINITY VISION",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:47:17-03:00",
       "fechas_conocidas": {
         "13": [
@@ -482,7 +482,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Avengers Endgame: Bonus",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:46:27-03:00",
       "fechas_conocidas": {
         "11": [
@@ -535,7 +535,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Resident evil: noche cero",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-19T19:41:31-03:00",
       "fechas_conocidas": {
         "18": [
@@ -570,7 +570,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Resident evil: noche cero",
-      "en_cartelera": true,
+      "en_cartelera": false,
       "visto_por_primera_vez": "2026-10-14T15:46:42-03:00",
       "fechas_conocidas": {
         "11": [
@@ -3141,43 +3141,35 @@
     "6192": "2026-10-20T11:51:59-03:00",
     "6194": "2026-10-20T11:52:09-03:00",
     "6193": "2026-10-20T11:52:04-03:00",
-    "6195": "2026-10-20T12:02:05-03:00",
-    "6101": "2026-10-20T12:01:59-03:00",
+    "6195": "2026-10-20T12:07:40-03:00",
+    "6101": "2026-10-20T12:07:36-03:00",
     "5875": "2026-10-20T11:31:49-03:00",
     "6155": "2026-10-14T22:32:22-03:00",
     "6159": "2026-10-20T11:41:40-03:00",
     "6157": "2026-10-20T11:41:33-03:00",
-    "6156": "2026-10-20T11:32:03-03:00",
-    "6154": "2026-10-20T11:31:59-03:00",
-    "6102": "2026-10-20T12:01:41-03:00",
+    "6156": "2026-10-20T12:08:04-03:00",
+    "6154": "2026-10-20T12:07:59-03:00",
+    "6102": "2026-10-20T12:07:25-03:00",
     "6112": "2026-10-14T22:32:01-03:00",
     "6017": "2026-10-20T12:01:54-03:00",
-    "6083": "2026-10-20T11:31:45-03:00",
-    "6082": "2026-10-20T11:22:10-03:00",
+    "6083": "2026-10-20T12:07:49-03:00",
+    "6082": "2026-10-20T12:07:44-03:00",
     "6060": "2026-10-20T11:22:05-03:00",
     "5984": "2026-10-20T12:02:31-03:00",
     "5955": "2026-10-14T22:31:41-03:00",
     "5934": "2026-10-14T22:31:35-03:00",
     "5845": "2026-10-20T12:02:22-03:00",
     "6158": "2026-10-20T11:41:37-03:00",
-    "6114": "2026-10-20T11:31:53-03:00",
+    "6114": "2026-10-20T12:07:55-03:00",
     "6016": "2026-10-20T11:21:59-03:00",
     "5927": "2026-10-20T12:02:26-03:00",
     "6203": "2026-10-20T12:02:11-03:00",
-    "6209": "2026-10-20T12:01:48-03:00",
+    "6209": "2026-10-20T12:07:31-03:00",
     "6214": "2026-10-20T12:02:16-03:00"
   },
   "panel": {
     "enviado": true,
     "mostradas": [
-      "5845",
-      "5875-imax",
-      "5875",
-      "5927",
-      "5984",
-      "6016",
-      "6060-imax",
-      "6060",
       "6082",
       "6083",
       "6101",
@@ -3202,9 +3194,7 @@
     ],
     "comandos": {
       "seguir": {
-        "aebiv": "6016",
         "c20a": "6159",
-        "cva": "5984",
         "d": "6101",
         "cob": "6083",
         "em": "6194",
@@ -3212,19 +3202,13 @@
         "hpi": "6157",
         "ca": "6156",
         "cab": "6191",
-        "i": "5927",
         "io": "6082",
-        "o": "5875",
-        "o_imax": "5875-imax",
         "vea": "6158",
         "ljdhsp1": "6171",
         "ljdhsp2": "6172",
         "ms": "6154",
         "obsbttb": "6214",
         "qts": "6192",
-        "renc": "6060",
-        "renc_imax": "6060-imax",
-        "smund": "5845",
         "sf": "6177",
         "sf_imax": "6177-imax",
         "ti": "6193",
