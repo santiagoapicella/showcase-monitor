@@ -49,6 +49,12 @@ jobs:
     steps:
       - name: Bajar el repo
         uses: actions/checkout@v5
+        with:
+          # Siempre la ÚLTIMA versión de main (con el estado más nuevo), y no la
+          # del momento en que se disparó la corrida. Si no, una corrida que
+          # esperó en cola, o un "Re-run" de una corrida vieja, trabajaría con
+          # un estado viejo y lo pisaría al guardar.
+          ref: main
 
       - name: Instalar Python
         uses: actions/setup-python@v6
@@ -99,8 +105,5 @@ jobs:
             echo "Falló el push (intento $intento); reintento..."
             sleep 5
           done
-          echo "::error title=No se pudo guardar el estado::El push de state/ falló 3 veces. La próxima corrida va a trabajar con el estado anterior. Revisá Settings → Actions → General → Workflow permissions (Read and write)."
-          exit 1
-
           echo "::error title=No se pudo guardar el estado::El push de state/ falló 3 veces. La próxima corrida va a trabajar con el estado anterior. Revisá Settings → Actions → General → Workflow permissions (Read and write)."
           exit 1
