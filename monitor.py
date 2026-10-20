@@ -493,6 +493,16 @@ def leer_cartelera(navegador):
         page.wait_for_selector("a[href*='filmid=']", state="attached", timeout=30000)
         page.wait_for_timeout(2500)  # el pop-up suele aparecer un instante después
         cerrar_popups(page)
+        # La portada puede ir cargando películas de a poco: se baja hasta el final
+        # y se espera a que la cantidad de links deje de crecer.
+        anterior = -1
+        for _ in range(8):
+            page.mouse.wheel(0, 20000)
+            page.wait_for_timeout(1500)
+            cantidad = page.locator("a[href*='filmid=']").count()
+            if cantidad == anterior:
+                break
+            anterior = cantidad
         crudos = page.evaluate(JS_CARTELERA)
     finally:
         page.close()
@@ -698,6 +708,12 @@ def resumen_horarios(entradas):
     return " · ".join(f"{n}: {', '.join(hs)}" for n, hs in por_sucursal.items())
 
 
+def sucursales_vigentes(fechas_por_suc):
+    """Ids de sucursal que tienen alguna fecha de hoy en adelante."""
+    hoy_iso = hoy().isoformat()
+    return {sid for sid, fechas in (fechas_por_suc or {}).items() if any(f >= hoy_iso for f in fechas)}
+
+
 def es_visible(ctx, p):
     """Una película aparece en CARTELERA si tiene funciones en tus sucursales
     activas, o si todavía no tiene funciones en ningún lado (ej. anticipada)."""
@@ -708,8 +724,7 @@ def es_visible(ctx, p):
     actuales = p.get("fechas_actuales")
     if actuales is None:  # ítem de una versión anterior, todavía no releído
         actuales = p.get("fechas_conocidas") or {}
-    hoy_iso = hoy().isoformat()
-    vigentes = {sid for sid, fechas in actuales.items() if any(f >= hoy_iso for f in fechas)}
+    vigentes = sucursales_vigentes(actuales)
     if not vigentes:
         return bool(p.get("esperando_primeras_fechas"))
     return bool(vigentes & ctx.activas)
@@ -893,7 +908,10 @@ def actualizar_panel(ctx):
         # para que los comandos del panel anterior (/seguir12) dejen de usarse.
         ctx.estado["panel_pendiente"] = True
     if panel.get("enviado"):
-        nuevas = {fid for fid in ctx.recien_visibles if fid in visibles}
+        # Agregada = está ahora y no estaba en el último panel que te llegó.
+        # (Se compara contra el panel, no contra lo detectado en esta corrida, así
+        # el panel siempre es coherente con el anterior aunque algo falle en el medio.)
+        nuevas = visibles - anteriores
         # Quitada = estaba en el panel anterior y ya no está (salió de la web, o
         # ya no tiene funciones en tus sucursales). Si en esta corrida cambiaste
         # de sucursales, no se listan: el panel llega igual, pero sin una lista
@@ -914,7 +932,15 @@ def actualizar_panel(ctx):
         nuevas, quitadas = set(), []  # primer panel: sin marcas
 
     texto, comandos = armar_panel(ctx, visibles, nuevas, quitadas)
-    log.info("Mando el panel (%d nuevas, %d quitadas).", len(nuevas), len(quitadas))
+    log.info("MANDO EL PANEL (%d nuevas, %d quitadas).", len(nuevas), len(quitadas))
+    if nuevas:
+        log.info("   Agregadas: %s", " | ".join(sorted(titulo_panel(ctx, i) for i in nuevas)))
+    if quitadas:
+        log.info("   Quitadas: %s", " | ".join(sorted(quitadas)))
+        for fid in sorted(anteriores - visibles):
+            p = ctx.peliculas.get(fid) or {}
+            log.info("      %s: en la web=%s, fechas de la última lectura=%s", titulo_panel(ctx, fid),
+                     p.get("en_cartelera"), p.get("fechas_actuales"))
     try:
         ctx.tg.enviar_mensaje(texto)
     except ErrorTelegram as e:
@@ -1244,10 +1270,24 @@ def procesar_item(ctx, iid, filmid, variante, info_cartelera, resultado, silenci
 
     oculta_antes = not es_visible(ctx, p)
     # Fechas de esta lectura (reemplazan a las anteriores; deciden si se muestra).
-    p["fechas_actuales"] = unir_fechas({}, actuales)
+    # Protección: si la película tenía funciones en tus sucursales y esta lectura
+    # vino vacía, puede ser una falla pasajera del sitio (pasa, por ejemplo,
+    # mientras el cine carga la programación nueva). No se cree hasta que una
+    # segunda lectura, en otra corrida, lo confirme.
+    nuevas_actuales = unir_fechas({}, actuales)
+    dudosa = False
+    if sucursales_vigentes(p.get("fechas_actuales")) & ctx.activas and not fechas_mias:
+        p["lecturas_vacias"] = p.get("lecturas_vacias", 0) + 1
+        if p["lecturas_vacias"] < 2:
+            dudosa = True
+            log.info("   %s vino sin funciones en tus sucursales; espero a confirmarlo "
+                     "en la próxima corrida antes de quitarla.", p["titulo"])
+    if not dudosa:
+        p["fechas_actuales"] = nuevas_actuales
+        p["lecturas_vacias"] = 0
     if resultado.get("nombre_web"):
         p["nombre_web"] = resultado["nombre_web"]
-    if iid in ctx.seguidas:
+    if iid in ctx.seguidas and not dudosa:
         guardar_horarios(p, mias)
     if hay_funciones:
         p["esperando_primeras_fechas"] = False
@@ -1336,11 +1376,21 @@ def funciones_vigentes(p):
     return vigentes
 
 
-def actualizar_presencia(ctx, cartelera):
+def actualizar_presencia(ctx, cartelera, portada_dudosa=False):
     """Marca qué películas siguen en cartelera y refresca títulos y etiquetas."""
     for iid, p in ctx.peliculas.items():
         info = cartelera.get(p.get("filmid", filmid_de(iid)))
-        p["en_cartelera"] = info is not None
+        # Para darla por salida de la web tiene que faltar en 2 corridas seguidas
+        # (una portada incompleta por una falla pasajera no alcanza).
+        if info is not None:
+            p["ausencias"] = 0
+            p["en_cartelera"] = True
+        elif portada_dudosa:
+            pass  # portada incompleta: no se cuenta como ausencia
+        else:
+            p["ausencias"] = p.get("ausencias", 0) + 1
+            if p["ausencias"] >= 2 or not p.get("en_cartelera"):
+                p["en_cartelera"] = False
         variante = p.get("variante", "normal")
         if info and info["titulo"]:
             p["titulo"] = titulo_item(info["titulo"], variante)
@@ -1443,7 +1493,24 @@ def correr(ctx, modo, filmid_prueba):
                 # Algo raro (página caída, cambió el diseño...). No tocamos nada.
                 raise ErrorScraping(f"la cartelera trajo solo {len(cartelera)} películas")
             log.info("Cartelera: %d películas.", len(cartelera))
-            actualizar_presencia(ctx, cartelera)
+            # ¿La portada vino mucho más corta que la última vez? (ej. 21 en vez de 37)
+            # Probablemente cargó incompleta: esta vez no se da nada por salido.
+            antes = len({p.get("filmid") for p in ctx.peliculas.values() if p.get("en_cartelera")})
+            portada_corta = antes >= 10 and len(cartelera) < 0.75 * antes
+            if portada_corta:
+                ctx.estado["portadas_cortas"] = ctx.estado.get("portadas_cortas", 0) + 1
+            else:
+                ctx.estado["portadas_cortas"] = 0
+            # Corta 1 o 2 veces: se desconfía. Corta 3 corridas seguidas o más: el
+            # cine sacó películas de verdad y se toma como real.
+            portada_dudosa = portada_corta and ctx.estado["portadas_cortas"] < 3
+            if portada_dudosa:
+                log.warning("La portada trajo %d películas y antes había %d: parece incompleta. "
+                            "En esta corrida no se da ninguna película por salida.", len(cartelera), antes)
+            elif portada_corta:
+                log.info("La portada vino corta %d corridas seguidas: se toma como real.",
+                         ctx.estado["portadas_cortas"])
+            actualizar_presencia(ctx, cartelera, portada_dudosa)
 
             # ¿Qué películas hay que abrir? Las nuevas, las seguidas, las que no
             # tienen funciones todavía y las ocultas (solo en sucursales inactivas),
@@ -1460,7 +1527,8 @@ def correr(ctx, modo, filmid_prueba):
                 agregar_unico(a_leer, fid)
             for p in ctx.peliculas.values():
                 revisar = (p.get("esperando_primeras_fechas") or not es_visible(ctx, p)
-                           or "fechas_actuales" not in p)  # versión anterior: releer una vez
+                           or "fechas_actuales" not in p    # versión anterior: releer una vez
+                           or p.get("lecturas_vacias"))     # confirmar una lectura vacía
                 if p.get("rebasar") or (revisar and p.get("en_cartelera")):
                     agregar_unico(a_leer, p["filmid"])
             # Revisión rotativa: además, unas pocas películas de la cartelera, las
