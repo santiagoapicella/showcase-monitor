@@ -14,7 +14,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Spider-Man: un nuevo día",
-      "en_cartelera": false,
+      "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-14T15:47:00-03:00",
       "fechas_conocidas": {
         "11": [
@@ -129,7 +129,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3,
+      "ausencias": 0,
       "lecturas_vacias": 0
     },
     "5875-imax": {
@@ -141,7 +141,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "La Odisea",
-      "en_cartelera": false,
+      "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-14T15:45:44-03:00",
       "fechas_conocidas": {
         "18": [
@@ -172,7 +172,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3,
+      "ausencias": 0,
       "lecturas_vacias": 0
     },
     "5875": {
@@ -184,7 +184,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "La Odisea",
-      "en_cartelera": false,
+      "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-14T15:45:44-03:00",
       "fechas_conocidas": {
         "11": [
@@ -330,7 +330,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3,
+      "ausencias": 0,
       "lecturas_vacias": 0
     },
     "5927": {
@@ -342,7 +342,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "La invitación",
-      "en_cartelera": false,
+      "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-14T15:47:22-03:00",
       "fechas_conocidas": {
         "13": [
@@ -421,7 +421,7 @@
           "2026-10-27"
         ]
       },
-      "ausencias": 3,
+      "ausencias": 0,
       "lecturas_vacias": 0
     },
     "5934": {
@@ -446,7 +446,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 151
+      "ausencias": 152
     },
     "5955": {
       "filmid": "5955",
@@ -470,7 +470,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 151
+      "ausencias": 152
     },
     "5984": {
       "filmid": "5984",
@@ -481,7 +481,7 @@
       ],
       "etiquetas": [],
       "nombre_web": "Coyote vs ACME",
-      "en_cartelera": false,
+      "en_cartelera": true,
       "visto_por_primera_vez": "2026-10-14T15:46:45-03:00",
       "fechas_conocidas": {
         "11": [
@@ -645,7 +645,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3,
+      "ausencias": 0,
       "lecturas_vacias": 0
     },
     "6016": {
@@ -692,7 +692,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 3,
+      "ausencias": 4,
       "lecturas_vacias": 0
     },
     "6017": {
@@ -784,7 +784,7 @@
       "esperando_primeras_fechas": true,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 151
+      "ausencias": 152
     },
     "6060-imax": {
       "filmid": "6060",
@@ -1026,7 +1026,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 151
+      "ausencias": 152
     },
     "6076": {
       "filmid": "6076",
@@ -1063,7 +1063,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 151
+      "ausencias": 152
     },
     "6082": {
       "filmid": "6082",
@@ -1988,7 +1988,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 151
+      "ausencias": 152
     },
     "6112": {
       "filmid": "6112",
@@ -2015,7 +2015,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 151
+      "ausencias": 152
     },
     "6114": {
       "filmid": "6114",
@@ -2064,7 +2064,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 41,
+      "ausencias": 42,
       "lecturas_vacias": 0
     },
     "6154": {
@@ -2281,7 +2281,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 151
+      "ausencias": 152
     },
     "6156": {
       "filmid": "6156",
@@ -2813,7 +2813,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 151
+      "ausencias": 152
     },
     "6170": {
       "filmid": "6170",
@@ -2877,7 +2877,7 @@
           "2026-10-19"
         ]
       },
-      "ausencias": 151
+      "ausencias": 152
     },
     "6171": {
       "filmid": "6171",
@@ -2938,7 +2938,7 @@
           "2026-10-20"
         ]
       },
-      "ausencias": 151
+      "ausencias": 152
     },
     "6172": {
       "filmid": "6172",
@@ -3002,7 +3002,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 10,
+      "ausencias": 11,
       "lecturas_vacias": 0
     },
     "6177-imax": {
@@ -5133,30 +5133,30 @@
     "6192": "2026-10-21T20:32:09-03:00",
     "6194": "2026-10-21T20:41:36-03:00",
     "6193": "2026-10-21T20:41:30-03:00",
-    "6195": "2026-10-21T21:02:06-03:00",
-    "6101": "2026-10-21T21:02:01-03:00",
-    "5875": "2026-10-21T20:21:44-03:00",
+    "6195": "2026-10-21T21:11:35-03:00",
+    "6101": "2026-10-21T21:11:29-03:00",
+    "5875": "2026-10-21T21:11:59-03:00",
     "6155": "2026-10-14T22:32:22-03:00",
     "6159": "2026-10-21T20:32:01-03:00",
     "6157": "2026-10-21T20:31:51-03:00",
     "6156": "2026-10-21T21:02:26-03:00",
     "6154": "2026-10-21T21:02:23-03:00",
-    "6102": "2026-10-21T21:01:52-03:00",
+    "6102": "2026-10-21T21:11:20-03:00",
     "6112": "2026-10-14T22:32:01-03:00",
     "6017": "2026-10-21T20:51:32-03:00",
     "6083": "2026-10-21T20:51:28-03:00",
     "6082": "2026-10-21T20:41:51-03:00",
-    "6060": "2026-10-21T20:21:41-03:00",
-    "5984": "2026-10-21T20:02:06-03:00",
+    "6060": "2026-10-21T21:11:52-03:00",
+    "5984": "2026-10-21T21:11:49-03:00",
     "5955": "2026-10-14T22:31:41-03:00",
     "5934": "2026-10-14T22:31:35-03:00",
-    "5845": "2026-10-21T19:51:51-03:00",
+    "5845": "2026-10-21T21:11:39-03:00",
     "6158": "2026-10-21T20:31:55-03:00",
     "6114": "2026-10-21T13:51:47-03:00",
     "6016": "2026-10-21T20:41:18-03:00",
-    "5927": "2026-10-21T19:51:56-03:00",
+    "5927": "2026-10-21T21:11:44-03:00",
     "6203": "2026-10-21T20:41:41-03:00",
-    "6209": "2026-10-21T21:01:56-03:00",
+    "6209": "2026-10-21T21:11:25-03:00",
     "6214": "2026-10-21T20:41:46-03:00",
     "6220": "2026-10-21T20:51:36-03:00",
     "6222": "2026-10-21T20:51:48-03:00",
@@ -5168,6 +5168,11 @@
   "panel": {
     "enviado": true,
     "mostradas": [
+      "5845",
+      "5875-imax",
+      "5875",
+      "5927",
+      "5984",
       "6017",
       "6060-imax",
       "6060",
@@ -5202,6 +5207,7 @@
         "aeb": "6017",
         "bv": "6222",
         "c20a": "6159",
+        "cva": "5984",
         "d": "6101",
         "cob": "6083",
         "pr": "6220",
@@ -5210,7 +5216,10 @@
         "hpi": "6157",
         "ca": "6156",
         "cab": "6191",
+        "i": "5927",
         "io": "6082",
+        "o": "5875",
+        "o_imax": "5875-imax",
         "vea": "6158",
         "lo": "6225",
         "ms": "6154",
@@ -5218,6 +5227,7 @@
         "qts": "6192",
         "renc": "6060",
         "renc_imax": "6060-imax",
+        "smund": "5845",
         "sf": "6177",
         "sf_imax": "6177-imax",
         "ta": "6221",
