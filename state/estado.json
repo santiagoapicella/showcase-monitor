@@ -620,14 +620,6 @@
           "2026-11-02",
           "2026-11-03",
           "2026-11-04"
-        ],
-        "16": [
-          "2026-10-29",
-          "2026-10-30",
-          "2026-10-31",
-          "2026-11-01",
-          "2026-11-02",
-          "2026-11-04"
         ]
       },
       "ausencias": 0,
@@ -648,7 +640,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "5955": {
       "filmid": "5955",
@@ -962,7 +954,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1006,
+      "ausencias": 1007,
       "lecturas_vacias": 0
     },
     "6017": {
@@ -1003,7 +995,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 0,
+      "ausencias": 1,
       "lecturas_vacias": 0
     },
     "6028": {
@@ -1019,7 +1011,7 @@
       "esperando_primeras_fechas": true,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6060-imax": {
       "filmid": "6060",
@@ -1264,7 +1256,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6076": {
       "filmid": "6076",
@@ -1282,7 +1274,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6082": {
       "filmid": "6082",
@@ -2158,7 +2150,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6112": {
       "filmid": "6112",
@@ -2175,7 +2167,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6114": {
       "filmid": "6114",
@@ -2207,7 +2199,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 1044,
+      "ausencias": 1045,
       "lecturas_vacias": 0
     },
     "6154": {
@@ -2408,7 +2400,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6156": {
       "filmid": "6156",
@@ -2823,7 +2815,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6170": {
       "filmid": "6170",
@@ -2862,7 +2854,7 @@
           "2026-10-19"
         ]
       },
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6171": {
       "filmid": "6171",
@@ -2898,7 +2890,7 @@
           "2026-10-20"
         ]
       },
-      "ausencias": 1154
+      "ausencias": 1155
     },
     "6172": {
       "filmid": "6172",
@@ -2956,7 +2948,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 1013,
+      "ausencias": 1014,
       "lecturas_vacias": 0
     },
     "6177-imax": {
@@ -3491,7 +3483,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 990,
+      "ausencias": 991,
       "lecturas_vacias": 0
     },
     "6193": {
@@ -3523,7 +3515,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 990,
+      "ausencias": 991,
       "lecturas_vacias": 0
     },
     "6194": {
@@ -4707,13 +4699,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {
-        "11": [
-          "2026-10-28"
-        ],
         "12": [
-          "2026-10-28"
-        ],
-        "13": [
           "2026-10-28"
         ],
         "15": [
@@ -4724,7 +4710,7 @@
         ]
       },
       "ausencias": 0,
-      "lecturas_vacias": 1
+      "lecturas_vacias": 0
     },
     "6225": {
       "filmid": "6225",
@@ -4873,7 +4859,7 @@
         "Godzilla Minus Zero"
       ],
       "etiquetas": [
-        "ESTRENO"
+        "ANTICIPADA"
       ],
       "nombre_web": "Godzilla Minus Zero",
       "en_cartelera": true,
@@ -4902,7 +4888,7 @@
         "Godzilla Minus Zero"
       ],
       "etiquetas": [
-        "ESTRENO"
+        "ANTICIPADA"
       ],
       "nombre_web": "Godzilla Minus Zero",
       "en_cartelera": true,
@@ -5846,17 +5832,17 @@
     "6192": "2026-10-21T22:12:45-03:00",
     "6194": "2026-10-28T14:12:10-03:00",
     "6193": "2026-10-21T23:11:21-03:00",
-    "6195": "2026-10-28T14:31:33-03:00",
-    "6101": "2026-10-28T14:31:28-03:00",
+    "6195": "2026-10-28T14:41:19-03:00",
+    "6101": "2026-10-28T14:41:14-03:00",
     "5875": "2026-10-28T13:41:27-03:00",
     "6155": "2026-10-14T22:32:22-03:00",
     "6159": "2026-10-28T14:12:01-03:00",
     "6157": "2026-10-28T14:11:50-03:00",
-    "6156": "2026-10-28T13:22:11-03:00",
-    "6154": "2026-10-28T13:22:06-03:00",
+    "6156": "2026-10-28T14:41:54-03:00",
+    "6154": "2026-10-28T14:41:50-03:00",
     "6102": "2026-10-28T13:41:32-03:00",
     "6112": "2026-10-14T22:32:01-03:00",
-    "6017": "2026-10-28T14:31:24-03:00",
+    "6017": "2026-10-28T14:41:09-03:00",
     "6083": "2026-10-28T14:21:46-03:00",
     "6082": "2026-10-28T14:21:41-03:00",
     "6060": "2026-10-28T13:41:23-03:00",
@@ -5874,12 +5860,12 @@
     "6220": "2026-10-28T14:31:45-03:00",
     "6222": "2026-10-28T14:31:55-03:00",
     "6223": "2026-10-28T14:31:59-03:00",
-    "6225": "2026-10-28T13:22:01-03:00",
+    "6225": "2026-10-28T14:41:45-03:00",
     "6221": "2026-10-28T14:31:50-03:00",
-    "6224": "2026-10-28T14:32:05-03:00",
-    "6235": "2026-10-28T13:31:44-03:00",
+    "6224": "2026-10-28T14:41:25-03:00",
+    "6235": "2026-10-28T14:41:58-03:00",
     "6234": "2026-10-28T13:31:48-03:00",
-    "6236": "2026-10-28T14:31:37-03:00",
+    "6236": "2026-10-28T14:41:30-03:00",
     "6250": "2026-10-28T13:51:28-03:00",
     "6251": "2026-10-28T13:51:34-03:00",
     "6252": "2026-10-28T13:51:40-03:00",
@@ -5889,8 +5875,8 @@
     "6256": "2026-10-28T14:02:02-03:00",
     "5305": "2026-10-28T14:02:07-03:00",
     "5914": "2026-10-28T14:02:11-03:00",
-    "5929": "2026-10-28T13:21:56-03:00",
-    "6257": "2026-10-28T14:31:41-03:00"
+    "5929": "2026-10-28T14:41:40-03:00",
+    "6257": "2026-10-28T14:41:36-03:00"
   },
   "panel": {
     "enviado": true,
@@ -5926,7 +5912,6 @@
       "6221",
       "6222",
       "6223",
-      "6224",
       "6225",
       "6234-imax",
       "6234",
@@ -5957,7 +5942,6 @@
         "eoc_imax": "6235-imax",
         "gmz": "6234",
         "gmz_imax": "6234-imax",
-        "hrdl": "6224",
         "hpi": "6157",
         "cdd": "6251",
         "ca": "6156",
