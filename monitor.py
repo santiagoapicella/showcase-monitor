@@ -863,10 +863,10 @@ def armar_panel(ctx, visibles, nuevas, quitadas):
         lineas.append("✅ Agregamos: " + esc(", ".join(titulos)))
     if quitadas:
         lineas.append("❌ Quitamos: " + esc(", ".join(sorted(quitadas))))
-    lineas.append("")
     if not orden:
-        lineas.append("(no hay películas en tus sucursales activas)")
-    for n, iid in enumerate(orden, 1):
+        lineas += ["", "(no hay películas en tus sucursales activas)"]
+
+    def linea_pelicula(n, iid):
         # Sin etiquetas (ESTRENO, ANTICIPADA...): alcanza con "nueva". Solo [IMAX].
         nueva = f"  <b>{ETIQUETA_NUEVA}</b>" if iid in nuevas else ""
         if iid in ctx.seguidas:
@@ -874,7 +874,36 @@ def armar_panel(ctx, visibles, nuevas, quitadas):
         else:
             accion = f"/seguir{codigos[iid]}"
             comandos["seguir"][codigos[iid].lower()] = iid
-        lineas.append(f"{n}. {esc(titulo_panel(ctx, iid))}{nueva}  {accion}")
+        return f"{n}. {esc(titulo_panel(ctx, iid))}{nueva}  {accion}"
+
+    def sucursales_de(iid):
+        p = ctx.peliculas[iid]
+        actuales = p.get("fechas_actuales")
+        if actuales is None:
+            actuales = p.get("fechas_conocidas") or {}
+        return sucursales_vigentes(actuales) & ctx.activas
+
+    # Una lista por sucursal activa: IMAX siempre primero, después las demás en
+    # orden fijo. Una película que se da en dos sucursales aparece en las dos.
+    # Las que todavía no tienen funciones (ej. anticipadas) van en una lista aparte.
+    orden_sucursales = ["18"] + [s for s in SUCURSALES if s != "18"]
+    n = 0
+    for sid in orden_sucursales:
+        if sid not in ctx.activas:
+            continue
+        de_esta = [iid for iid in orden if sid in sucursales_de(iid)]
+        if not de_esta:
+            continue
+        lineas += ["", f"<b>🏢 {esc(SUCURSALES[sid])}</b>"]
+        for iid in de_esta:
+            n += 1
+            lineas.append(linea_pelicula(n, iid))
+    sin_funciones = [iid for iid in orden if not sucursales_de(iid)]
+    if sin_funciones:
+        lineas += ["", "<b>🕐 Sin funciones todavía</b>"]
+        for iid in sin_funciones:
+            n += 1
+            lineas.append(linea_pelicula(n, iid))
     lineas += ["", f"<b>Total títulos: {len(orden)}</b>"]
 
     if seguidas:
