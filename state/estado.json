@@ -1,8 +1,8 @@
 {
   "inicializado": true,
   "ultimo_update_id": 189480851,
-  "fallos_seguidos": 0,
-  "ultimo_error": null,
+  "fallos_seguidos": 1,
+  "ultimo_error": "la cartelera trajo solo 4 películas",
   "ultima_corrida_ok": "2026-11-18",
   "peliculas": {
     "5305": {
