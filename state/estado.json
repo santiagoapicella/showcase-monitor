@@ -21,7 +21,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2083,
+      "ausencias": 2084,
       "lecturas_vacias": 0
     },
     "5845": {
@@ -40,7 +40,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2077,
+      "ausencias": 2078,
       "lecturas_vacias": 0
     },
     "5875-imax": {
@@ -188,7 +188,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2040,
+      "ausencias": 2041,
       "lecturas_vacias": 0
     },
     "5927": {
@@ -230,7 +230,7 @@
           "2026-11-11"
         ]
       },
-      "ausencias": 1037,
+      "ausencias": 1038,
       "lecturas_vacias": 0
     },
     "5929": {
@@ -249,7 +249,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2071,
+      "ausencias": 2072,
       "lecturas_vacias": 0
     },
     "5934": {
@@ -267,7 +267,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "5955": {
       "filmid": "5955",
@@ -284,7 +284,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 2040,
+      "ausencias": 2041,
       "fechas_actuales": {},
       "lecturas_vacias": 0
     },
@@ -455,7 +455,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 4135,
+      "ausencias": 4136,
       "lecturas_vacias": 0
     },
     "6017": {
@@ -474,7 +474,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 3129,
+      "ausencias": 3130,
       "lecturas_vacias": 0
     },
     "6028": {
@@ -490,7 +490,7 @@
       "esperando_primeras_fechas": true,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6060-imax": {
       "filmid": "6060",
@@ -610,7 +610,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6076": {
       "filmid": "6076",
@@ -628,7 +628,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6082": {
       "filmid": "6082",
@@ -1202,7 +1202,6 @@
           "2026-11-25"
         ],
         "14": [
-          "2026-11-18",
           "2026-11-19",
           "2026-11-20",
           "2026-11-21",
@@ -1237,7 +1236,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6112": {
       "filmid": "6112",
@@ -1254,7 +1253,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6114": {
       "filmid": "6114",
@@ -1279,7 +1278,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 4173,
+      "ausencias": 4174,
       "lecturas_vacias": 0
     },
     "6154": {
@@ -1409,7 +1408,7 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6156": {
       "filmid": "6156",
@@ -1460,7 +1459,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 0,
+      "ausencias": 1,
       "lecturas_vacias": 0
     },
     "6157": {
@@ -1483,7 +1482,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3098,
+      "ausencias": 3099,
       "lecturas_vacias": 0
     },
     "6158": {
@@ -1502,7 +1501,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 3113,
+      "ausencias": 3114,
       "lecturas_vacias": 0
     },
     "6159": {
@@ -1521,7 +1520,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2089,
+      "ausencias": 2090,
       "lecturas_vacias": 0
     },
     "6169": {
@@ -1542,7 +1541,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6170": {
       "filmid": "6170",
@@ -1581,7 +1580,7 @@
           "2026-10-19"
         ]
       },
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6171": {
       "filmid": "6171",
@@ -1617,7 +1616,7 @@
           "2026-10-20"
         ]
       },
-      "ausencias": 4283
+      "ausencias": 4284
     },
     "6172": {
       "filmid": "6172",
@@ -1656,7 +1655,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 4142,
+      "ausencias": 4143,
       "lecturas_vacias": 0
     },
     "6177-imax": {
@@ -1765,7 +1764,7 @@
       },
       "tandas": {},
       "ultima_tanda": 0,
-      "ausencias": 1053,
+      "ausencias": 1054,
       "lecturas_vacias": 0
     },
     "6177": {
@@ -1797,7 +1796,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1053,
+      "ausencias": 1054,
       "lecturas_vacias": 0
     },
     "6191": {
@@ -1829,7 +1828,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 143,
+      "ausencias": 144,
       "lecturas_vacias": 0
     },
     "6192": {
@@ -1875,7 +1874,7 @@
           "2026-10-21"
         ]
       },
-      "ausencias": 4119,
+      "ausencias": 4120,
       "lecturas_vacias": 0
     },
     "6193": {
@@ -1894,7 +1893,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 4119,
+      "ausencias": 4120,
       "lecturas_vacias": 0
     },
     "6194": {
@@ -1917,7 +1916,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1080,
+      "ausencias": 1081,
       "lecturas_vacias": 0
     },
     "6195": {
@@ -1936,7 +1935,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2086,
+      "ausencias": 2087,
       "lecturas_vacias": 0
     },
     "6203": {
@@ -1962,7 +1961,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1034,
+      "ausencias": 1035,
       "lecturas_vacias": 0
     },
     "6209": {
@@ -2214,7 +2213,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2412,
+      "ausencias": 2413,
       "lecturas_vacias": 0
     },
     "6220": {
@@ -2241,7 +2240,7 @@
           "2026-11-11"
         ]
       },
-      "ausencias": 1031,
+      "ausencias": 1032,
       "lecturas_vacias": 0
     },
     "6221": {
@@ -2270,7 +2269,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3076,
+      "ausencias": 3077,
       "lecturas_vacias": 0
     },
     "6222": {
@@ -2289,7 +2288,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 3079,
+      "ausencias": 3080,
       "lecturas_vacias": 0
     },
     "6223": {
@@ -2315,7 +2314,7 @@
           "2026-10-28"
         ]
       },
-      "ausencias": 3095,
+      "ausencias": 3096,
       "lecturas_vacias": 0
     },
     "6224": {
@@ -2334,7 +2333,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 3123,
+      "ausencias": 3124,
       "lecturas_vacias": 0
     },
     "6225": {
@@ -2353,7 +2352,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2040,
+      "ausencias": 2041,
       "lecturas_vacias": 0
     },
     "6234-imax": {
@@ -2583,7 +2582,7 @@
           "2026-11-04"
         ]
       },
-      "ausencias": 2058,
+      "ausencias": 2059,
       "lecturas_vacias": 0
     },
     "6236": {
@@ -2602,7 +2601,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1091,
+      "ausencias": 1092,
       "lecturas_vacias": 0
     },
     "6250": {
@@ -2908,7 +2907,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1077,
+      "ausencias": 1078,
       "lecturas_vacias": 0
     },
     "6252": {
@@ -3104,7 +3103,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2040,
+      "ausencias": 2041,
       "lecturas_vacias": 0
     },
     "6254": {
@@ -3123,7 +3122,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2055,
+      "ausencias": 2056,
       "lecturas_vacias": 0
     },
     "6255": {
@@ -3218,7 +3217,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2040,
+      "ausencias": 2041,
       "lecturas_vacias": 0
     },
     "6257": {
@@ -3237,7 +3236,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 2052,
+      "ausencias": 2053,
       "lecturas_vacias": 0
     },
     "6275": {
@@ -3452,7 +3451,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1034,
+      "ausencias": 1035,
       "lecturas_vacias": 0
     },
     "6277": {
@@ -3475,7 +3474,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1053,
+      "ausencias": 1054,
       "lecturas_vacias": 0
     },
     "6278": {
@@ -3510,7 +3509,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 1034,
+      "ausencias": 1035,
       "lecturas_vacias": 0
     },
     "6291-imax": {
@@ -4340,22 +4339,9 @@
       "esperando_primeras_fechas": false,
       "rebasar": false,
       "confirmar_seguimiento": false,
-      "fechas_actuales": {
-        "11": [
-          "2026-11-18"
-        ],
-        "13": [
-          "2026-11-18"
-        ],
-        "15": [
-          "2026-11-18"
-        ],
-        "16": [
-          "2026-11-18"
-        ]
-      },
-      "ausencias": 0,
-      "lecturas_vacias": 1
+      "fechas_actuales": {},
+      "ausencias": 1,
+      "lecturas_vacias": 0
     },
     "6299": {
       "filmid": "6299",
@@ -4399,7 +4385,7 @@
           "2026-11-18"
         ]
       },
-      "ausencias": 16,
+      "ausencias": 17,
       "lecturas_vacias": 0
     },
     "6300": {
@@ -4455,7 +4441,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 39,
+      "ausencias": 40,
       "lecturas_vacias": 0
     },
     "6301": {
@@ -4488,7 +4474,7 @@
           "2026-11-18"
         ]
       },
-      "ausencias": 16,
+      "ausencias": 17,
       "lecturas_vacias": 0
     },
     "6302": {
@@ -4560,7 +4546,7 @@
       "rebasar": false,
       "confirmar_seguimiento": false,
       "fechas_actuales": {},
-      "ausencias": 0,
+      "ausencias": 1,
       "lecturas_vacias": 0
     },
     "6323-imax": {
@@ -5084,19 +5070,19 @@
     "6194": "2026-11-11T14:41:23-03:00",
     "6193": "2026-10-21T23:11:21-03:00",
     "6195": "2026-11-04T15:41:24-03:00",
-    "6101": "2026-11-18T23:02:01-03:00",
-    "5875": "2026-11-18T23:01:47-03:00",
+    "6101": "2026-11-18T23:11:29-03:00",
+    "5875": "2026-11-18T23:11:17-03:00",
     "6155": "2026-10-14T22:32:22-03:00",
     "6159": "2026-11-04T15:12:14-03:00",
     "6157": "2026-10-28T18:51:59-03:00",
-    "6156": "2026-11-18T23:02:08-03:00",
-    "6154": "2026-11-18T23:02:04-03:00",
-    "6102": "2026-11-18T22:32:38-03:00",
+    "6156": "2026-11-18T23:11:40-03:00",
+    "6154": "2026-11-18T23:11:33-03:00",
+    "6102": "2026-11-18T23:12:12-03:00",
     "6112": "2026-10-14T22:32:01-03:00",
     "6017": "2026-10-28T14:41:09-03:00",
     "6083": "2026-11-18T23:02:53-03:00",
-    "6082": "2026-11-18T23:01:57-03:00",
-    "6060": "2026-11-18T23:01:52-03:00",
+    "6082": "2026-11-18T23:11:24-03:00",
+    "6060": "2026-11-18T23:11:20-03:00",
     "5984": "2026-11-18T23:02:45-03:00",
     "5955": "2026-11-04T23:11:32-03:00",
     "5934": "2026-10-14T22:31:35-03:00",
@@ -5115,7 +5101,7 @@
     "6221": "2026-10-28T22:21:37-03:00",
     "6224": "2026-10-28T15:41:17-03:00",
     "6235": "2026-11-04T19:32:05-03:00",
-    "6234": "2026-11-18T23:02:13-03:00",
+    "6234": "2026-11-18T23:11:44-03:00",
     "6236": "2026-11-11T09:51:32-03:00",
     "6250": "2026-11-18T22:42:09-03:00",
     "6251": "2026-11-11T15:11:35-03:00",
@@ -5133,21 +5119,21 @@
     "6278": "2026-11-11T22:41:31-03:00",
     "6277": "2026-11-11T19:41:44-03:00",
     "6291": "2026-11-18T22:52:04-03:00",
-    "6295": "2026-11-18T22:42:03-03:00",
-    "6296": "2026-11-18T23:02:17-03:00",
+    "6295": "2026-11-18T23:12:30-03:00",
+    "6296": "2026-11-18T23:11:47-03:00",
     "6297": "2026-11-18T22:52:13-03:00",
-    "6298": "2026-11-18T23:02:41-03:00",
-    "6302": "2026-11-18T23:02:21-03:00",
+    "6298": "2026-11-18T23:11:52-03:00",
+    "6302": "2026-11-18T23:11:58-03:00",
     "6299": "2026-11-18T19:22:01-03:00",
     "6300": "2026-11-18T16:11:43-03:00",
     "6301": "2026-11-18T19:32:33-03:00",
     "6323": "2026-11-18T22:52:18-03:00",
     "6325": "2026-11-18T23:02:37-03:00",
-    "6331": "2026-11-18T22:32:42-03:00",
-    "6332": "2026-11-18T22:32:46-03:00",
-    "6333": "2026-11-18T22:41:59-03:00",
-    "6330": "2026-11-18T23:02:26-03:00",
-    "6334": "2026-11-18T23:02:32-03:00"
+    "6331": "2026-11-18T23:12:18-03:00",
+    "6332": "2026-11-18T23:12:23-03:00",
+    "6333": "2026-11-18T23:12:26-03:00",
+    "6330": "2026-11-18T23:12:04-03:00",
+    "6334": "2026-11-18T23:12:08-03:00"
   },
   "panel": {
     "enviado": true,
@@ -5167,7 +5153,6 @@
       "6291",
       "6295",
       "6297",
-      "6298",
       "6323-imax",
       "6325",
       "6331",
@@ -5178,7 +5163,6 @@
       "seguir": {
         "lndcb_imax": "6323-imax",
         "ljdhac_imax": "6291-imax",
-        "a": "6298",
         "csn": "6297",
         "c": "6209",
         "cva": "5984",
